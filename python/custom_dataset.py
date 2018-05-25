@@ -15,7 +15,7 @@ import numpy as np
 import os
 
 
-DATADIR = '/home/jruizvar/work/cnn-model/data'
+DATADIR = '/Users/jose/Work/ml-physics/data'
 
 ELEC = 'eminus_Ele-Eta0-PhiPiOver2-Energy50.npy'
 PHOT = 'gamma-Photon-Eta0-PhiPiOver2-Energy50.npy'
