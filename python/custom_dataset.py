@@ -10,12 +10,12 @@
         Photon   --> 1
         Pion     --> 2
 """
-
+from sklearn.preprocessing import binarize
 import numpy as np
 import os
 
 
-DATADIR = '/home/jose/work/cnn-model/data'
+DATADIR = '/home/jruizvar/work/cnn-model/data'
 
 ELEC = 'eminus_Ele-Eta0-PhiPiOver2-Energy50.npy'
 PHOT = 'gamma-Photon-Eta0-PhiPiOver2-Energy50.npy'
@@ -43,13 +43,23 @@ def read_data():
     return X[p], y[p]
 
 
-def load_dataset():
+def binarizer(X, threshold):
+    """ Boolean thresholding of array
+    """
+    return binarize(np.reshape(X, [-1, 28*28]), threshold=threshold)
+
+
+def load_dataset(binarization=False, threshold=2.0):
     """ Build dataset
     """
     X, y = read_data()
 
     X_train, X_eval = X[:45000], X[45000:55000]
     y_train, y_eval = y[:45000], y[45000:55000]
+
+    if binarization:
+        X_train = binarizer(X_train, threshold)
+        X_eval = binarizer(X_eval, threshold)
 
     class Dataset(object):
         def __repr__(self):
@@ -59,22 +69,24 @@ def load_dataset():
     dataset.train = Dataset()
     dataset.validation = Dataset()
 
-    dataset.train.images = X_train
+    dataset.train.images = np.reshape(X_train, [-1, 28, 28, 1])
     dataset.train.labels = y_train
     dataset.train.num_examples = len(y_train)
 
-    dataset.validation.images = X_eval
+    dataset.validation.images = np.reshape(X_eval, [-1, 28, 28, 1])
     dataset.validation.labels = y_eval
     dataset.validation.num_examples = len(y_eval)
     return dataset
 
 
 if __name__ == '__main__':
-    dataset = load_dataset()
+    dataset = load_dataset(binarization=True)
     print(dataset)
     train_data = dataset.train.images
     train_labels = dataset.train.labels
     eval_data = dataset.validation.images
     eval_labels = dataset.validation.labels
-    print(train_data.shape, train_labels.shape)
-    print(eval_data.shape, eval_labels.shape)
+    print(train_data.shape)
+    print(eval_data.shape)
+    print(train_data.max())
+    print(eval_data.max())

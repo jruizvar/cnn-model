@@ -23,7 +23,7 @@ flags.DEFINE_string("model_dir",
 FLAGS = flags.FLAGS
 
 
-def dnn(inputs, mode):
+def dnn(inputs, training):
     """ Design deep neural network
     """
     conv1 = tf.layers.conv2d(
@@ -52,7 +52,7 @@ def dnn(inputs, mode):
         activation=tf.nn.relu)
     dropout = tf.layers.dropout(
         dense, rate=0.4,
-        training=mode == tf.estimator.ModeKeys.TRAIN)
+        training=training)
     logits = tf.layers.dense(
         dropout,
         units=3,
@@ -63,8 +63,8 @@ def dnn(inputs, mode):
 def model_fn(features, labels, mode):
     """ Model function
     """
-    inputs = tf.reshape(features['x'], [-1, 28, 28, 1])
-    logits = dnn(inputs, mode)
+    inputs = features['x']
+    logits = dnn(inputs, mode == tf.estimator.ModeKeys.TRAIN)
 
     predictions = {
         'classes': tf.argmax(logits, axis=1),
