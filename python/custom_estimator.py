@@ -26,15 +26,14 @@ FLAGS = flags.FLAGS
 def model_fn(features, labels, mode):
     """ Model function
     """
-    inputs = tf.reshape(features['x'], [-1, 28, 28, 1])
-    conv1 = tf.layers.conv2d(inputs, 32, 5,
-                             padding='same', activation=tf.nn.relu)
+    conv1 = tf.layers.conv2d(tf.reshape(features['x'], [-1, 28, 28, 1]),
+                             32, 5, padding='same', activation=tf.nn.relu)
     pool1 = tf.layers.max_pooling2d(conv1, 2, 2)
     conv2 = tf.layers.conv2d(pool1, 64, 5,
                              padding='same', activation=tf.nn.relu)
     pool2 = tf.layers.max_pooling2d(conv2, 2, 2)
-    pool2_flat = tf.reshape(pool2, [-1, 7*7*64])
-    dense = tf.layers.dense(pool2_flat, 1024, activation=tf.nn.relu)
+    dense = tf.layers.dense(tf.reshape(pool2, [-1, 7*7*64]),
+                            1024, activation=tf.nn.relu)
     dropout = tf.layers.dropout(dense, rate=0.4,
                                 training=mode == tf.estimator.ModeKeys.TRAIN)
     logits = tf.layers.dense(dropout, 3)
