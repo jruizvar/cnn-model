@@ -2,7 +2,7 @@
 """
 from absl import flags
 from custom_dataset import load_dataset
-from custom_models import dnn
+from custom_models import cnn
 
 import numpy as np
 import tensorflow as tf
@@ -28,7 +28,7 @@ def model_fn(features, labels, mode):
     """ Model function
     """
     inputs = features['x']
-    logits = dnn(inputs, mode == tf.estimator.ModeKeys.TRAIN)
+    logits = cnn(inputs, mode == tf.estimator.ModeKeys.TRAIN)
 
     predictions = {
         'classes': tf.argmax(logits, axis=1),

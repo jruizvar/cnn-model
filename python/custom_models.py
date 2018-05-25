@@ -3,8 +3,26 @@
 import tensorflow as tf
 
 
-def dnn(inputs, training):
-    """ Deep convolutional neural network
+def nn(inputs):
+    """ Shallow neural network
+    """
+    dense1 = tf.layers.dense(
+        tf.reshape(inputs, [-1, 28*28]),
+        units=10,
+        activation=tf.nn.relu)
+    dense2 = tf.layers.dense(
+        dense1,
+        units=10,
+        activation=tf.nn.relu)
+    logits = tf.layers.dense(
+        dense2,
+        units=3,
+        activation=None)
+    return logits
+
+
+def cnn(inputs, training):
+    """ Convolutional neural network
     """
     conv1 = tf.layers.conv2d(
         inputs,
