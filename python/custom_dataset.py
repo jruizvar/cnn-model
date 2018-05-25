@@ -49,7 +49,7 @@ def binarizer(X, threshold):
     return binarize(np.reshape(X, [-1, 28*28]), threshold=threshold)
 
 
-def load_dataset(binarization=False, threshold=2.0):
+def load_dataset(binarization=False, threshold=0.0001):
     """ Build dataset
     """
     X, y = read_data()
