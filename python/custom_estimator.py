@@ -23,7 +23,7 @@ flags.DEFINE_string("model_dir",
 FLAGS = flags.FLAGS
 
 
-def cnn_model_fn(features, labels, mode):
+def model_fn(features, labels, mode):
     """ Model function for CNN
     """
     input_layer = tf.reshape(features['x'], [-1, 28, 28, 1])
@@ -80,51 +80,45 @@ def cnn_model_fn(features, labels, mode):
     loss = tf.losses.sparse_softmax_cross_entropy(labels, logits)
 
     if mode == tf.estimator.ModeKeys.TRAIN:
-        optimizer = tf.train.AdamOptimizer(learning_rate=FLAGS.learning_rate)
-        train_op = optimizer.minimize(
-            loss=loss,
-            global_step=tf.train.get_global_step())
         return tf.estimator.EstimatorSpec(
             mode=mode,
             loss=loss,
-            train_op=train_op)
+            train_op=tf.train.AdamOptimizer(
+                learning_rate=FLAGS.learning_rate).minimize(
+                    loss=loss,
+                    global_step=tf.train.get_global_step()))
 
-    eval_metric_ops = {
-        'accuracy': tf.metrics.accuracy(labels, predictions['classes'])}
     return tf.estimator.EstimatorSpec(
         mode=mode,
         loss=loss,
-        eval_metric_ops=eval_metric_ops)
+        eval_metric_ops={
+            'accuracy': tf.metrics.accuracy(labels, predictions['classes'])})
 
 
 def main(_):
+    """ Load sprace dataset.
+        Execute custom estimator.
+    """
     sprace = load_dataset()
-    train_data = sprace.train.images
-    train_labels = sprace.train.labels
-    eval_data = sprace.validation.images
-    eval_labels = sprace.validation.labels
 
-    sprace_classifier = tf.estimator.Estimator(
-        model_fn=cnn_model_fn,
-        model_dir=FLAGS.model_dir)
+    classifier = tf.estimator.Estimator(model_fn, FLAGS.model_dir)
 
-    train_input_fn = tf.estimator.inputs.numpy_input_fn(
-        x={'x': train_data},
-        y=train_labels,
-        batch_size=FLAGS.batch_size,
-        num_epochs=None,
-        shuffle=True)
-    sprace_classifier.train(
-        input_fn=train_input_fn,
+    classifier.train(
+        input_fn=tf.estimator.inputs.numpy_input_fn(
+            x={'x': sprace.train.images},
+            y=sprace.train.labels,
+            batch_size=FLAGS.batch_size,
+            num_epochs=None,
+            shuffle=True),
         steps=FLAGS.steps)
 
-    eval_input_fn = tf.estimator.inputs.numpy_input_fn(
-        x={'x': eval_data},
-        y=eval_labels,
-        num_epochs=1,
-        shuffle=False)
-    eval_results = sprace_classifier.evaluate(
-        input_fn=eval_input_fn)
+    eval_results = classifier.evaluate(
+        input_fn=tf.estimator.inputs.numpy_input_fn(
+            x={'x': sprace.validation.images},
+            y=sprace.validation.labels,
+            num_epochs=1,
+            shuffle=False))
+
     print(eval_results)
 
 
