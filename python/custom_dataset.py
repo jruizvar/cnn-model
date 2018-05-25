@@ -1,8 +1,8 @@
 """ Custom dataset
 
-    Comprises 45K training examples and 10K test examples
+    Comprises 20K training examples and 20K test examples
     of the CMS electromagnetic calorimeter, formatted
-    as 28x28 pixel monochrome images.
+    as 28x28 pixel monochromatic images.
 
     The images are labeled as follows:
 
@@ -10,7 +10,6 @@
         Photon   --> 1
         Pion     --> 2
 """
-from sklearn.preprocessing import binarize
 import numpy as np
 import os
 
@@ -24,14 +23,19 @@ PION = 'piminus_Pion-Eta0-PhiPiOver2-Energy50.npy'
 np.random.seed(42)
 
 
-def read_data():
+def read_data(threshold):
     """ Read numpy arrays.
+        Select images with energy above the threshold.
         Assign labels and concatenate arrays.
         Finally, shuffles and returns.
     """
     elec = np.load(os.path.join(DATADIR, ELEC))
     phot = np.load(os.path.join(DATADIR, PHOT))
     pion = np.load(os.path.join(DATADIR, PION))
+
+    elec = np.array([i for i in elec if np.sum(i) > threshold])
+    phot = np.array([i for i in phot if np.sum(i) > threshold])
+    pion = np.array([i for i in pion if np.sum(i) > threshold])
 
     zeros = np.zeros(elec.shape[0], np.int32)
     ones = np.ones(phot.shape[0], np.int32)
@@ -43,23 +47,15 @@ def read_data():
     return X[p], y[p]
 
 
-def binarizer(X, threshold):
-    """ Boolean thresholding of array
-    """
-    return binarize(np.reshape(X, [-1, 28*28]), threshold=threshold)
-
-
-def load_dataset(binarization=False, threshold=0.0001):
+def load_dataset(threshold=0.0001):
     """ Build dataset
     """
-    X, y = read_data()
+    X, y = read_data(threshold)
 
-    X_train, X_eval = X[:45000], X[45000:55000]
-    y_train, y_eval = y[:45000], y[45000:55000]
+    m = min(len(y), 40000)
 
-    if binarization:
-        X_train = binarizer(X_train, threshold)
-        X_eval = binarizer(X_eval, threshold)
+    X_train, X_eval = X[:m//2], X[m//2:m]
+    y_train, y_eval = y[:m//2], y[m//2:m]
 
     class Dataset(object):
         def __repr__(self):
@@ -80,12 +76,10 @@ def load_dataset(binarization=False, threshold=0.0001):
 
 
 if __name__ == '__main__':
-    dataset = load_dataset(binarization=True)
+    dataset = load_dataset(threshold=10.)
     print(dataset)
     train_data = dataset.train.images
-    train_labels = dataset.train.labels
     eval_data = dataset.validation.images
-    eval_labels = dataset.validation.labels
     print(train_data.shape)
     print(eval_data.shape)
     print(train_data.max())
