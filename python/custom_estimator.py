@@ -1,7 +1,7 @@
-""" Build a model to classify the images in the sprace dataset
+""" Build a model to classify the images in the custom dataset
 """
 from absl import flags
-from sprace_dataset import load_dataset
+from custom_dataset import load_dataset
 
 import numpy as np
 import tensorflow as tf
@@ -18,7 +18,7 @@ flags.DEFINE_integer("steps",
                      default=100,
                      help="Number of steps.")
 flags.DEFINE_string("model_dir",
-                    default="/tmp/sprace_model",
+                    default="/tmp/model_dir",
                     help="Directory where model is stored.")
 FLAGS = flags.FLAGS
 
@@ -96,17 +96,17 @@ def model_fn(features, labels, mode):
 
 
 def main(_):
-    """ Load sprace dataset.
+    """ Load dataset dataset.
         Execute custom estimator.
     """
-    sprace = load_dataset()
+    dataset = load_dataset()
 
     classifier = tf.estimator.Estimator(model_fn, FLAGS.model_dir)
 
     classifier.train(
         input_fn=tf.estimator.inputs.numpy_input_fn(
-            x={'x': sprace.train.images},
-            y=sprace.train.labels,
+            x={'x': dataset.train.images},
+            y=dataset.train.labels,
             batch_size=FLAGS.batch_size,
             num_epochs=None,
             shuffle=True),
@@ -114,8 +114,8 @@ def main(_):
 
     eval_results = classifier.evaluate(
         input_fn=tf.estimator.inputs.numpy_input_fn(
-            x={'x': sprace.validation.images},
-            y=sprace.validation.labels,
+            x={'x': dataset.validation.images},
+            y=dataset.validation.labels,
             num_epochs=1,
             shuffle=False))
 
