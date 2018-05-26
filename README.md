@@ -1,5 +1,4 @@
-# Electron, Photon and Pion Classification with<br/>
-# Artificial Neural Networks
+# Electron, Photon and Pion Classification with <br/> Artificial Neural Networks
 ![](notebooks/image.png)
 
 The real time identification of particles is a challenging problem in high energy physics experiments.
