@@ -11,7 +11,7 @@ Python modules to perform analysis of high energy physics data.
 ## [custom_estimator.py](python/custom_estimator.py)
 - Build a classifier using [tf.estimator](https://www.tensorflow.org/api_docs/python/tf/estimator) API.
 
-# Results
+# Electron, Photon and Pion Classification with Neural Networks 
 Each classification model was trained in batches of 128 images during 10K steps (64 epochs).
 The energy threshold vary from 0 to 30 GeV in steps of 10 GeV.
 In terms of classification accuracy, the convolutional neural network outperforms the shallow model.
@@ -19,7 +19,7 @@ The following table sumarizes the results.
 
 <table>
   <tr>
-    <th colspan="6"><span style="font-weight:bold">Accuracy results</span></th>
+    <th colspan="6"><span style="font-weight:bold">Accuracy Results</span></th>
   </tr>
   <tr>
     <td>Model \ Energy threshold</td>
