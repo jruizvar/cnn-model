@@ -1,18 +1,18 @@
-# Machine Learning for Physics
- 
-Python modules to perform analysis of high energy physics data.
-
-## [custom_dataset.py](python/custom_dataset.py)
-- Create a dataset of training and validation examples with simulations of the CMS electromagnetic calorimeter.
-
-## [custom_models.py](python/custom_models.py)
-- Create models in [TensorFlow](https://www.tensorflow.org).
-
-## [custom_estimator.py](python/custom_estimator.py)
-- Build a classifier using [tf.estimator](https://www.tensorflow.org/api_docs/python/tf/estimator) API.
-
 ## Electron, Photon and Pion Classification with Neural Networks 
 ![](notebooks/image.png)
+
+The identification of particles in real time is a challenging problem in high energy physics experiments.
+The Compact Muon Solenoid (CMS) detector from the CERN's Large Hadron Collider (LHC) relies on the electromagnetic
+calorimeter (ECAL) to identify electrons and photons. Usually, the ECAL information is complemented with
+the tracker detector to increase the identification efficiency at the expense of delaying detection time.
+An accurate identification of electrons and photons based on pure ECAL information would be extremely
+important in many analysis workflows.
+
+This study aims the identification of electrons and photons by simulating the signature of these particles
+in the ECAL detector. Charged pions are included in the simulation as they are frequently produced
+in LHC collisions. Our approach to deal with this supervised classification problem is based on
+artificial neural networks (NN). Two models are studied, the firt one is a shallow NN with fully connected
+layers while the second model involves convolutional layers.
 
 Each classification model was trained in batches of 128 images during 10K steps (64 epochs).
 The energy threshold vary from 0 to 30 GeV in steps of 10 GeV.
@@ -45,3 +45,16 @@ The following table sumarizes the results.
     <td>0.922</td>
   </tr>
 </table>
+
+## Python Modules
+
+## [custom_dataset.py](python/custom_dataset.py)
+- Create a dataset of training and validation examples with simulations of the CMS electromagnetic calorimeter.
+
+## [custom_models.py](python/custom_models.py)
+- Create models in [TensorFlow](https://www.tensorflow.org).
+
+## [custom_estimator.py](python/custom_estimator.py)
+- Build a classifier using [tf.estimator](https://www.tensorflow.org/api_docs/python/tf/estimator) API.
+
+
