@@ -1,7 +1,7 @@
-## Electron, Photon and Pion Classification with Neural Networks 
+# Electron, Photon and Pion Classification with Artificial Neural Networks
 ![](notebooks/image.png)
 
-The identification of particles in real time is a challenging problem in high energy physics experiments.
+The real time identification of particles is a challenging problem in high energy physics experiments.
 The Compact Muon Solenoid (CMS) detector from the CERN's Large Hadron Collider (LHC) relies on the electromagnetic
 calorimeter (ECAL) to identify electrons and photons. Usually, the ECAL information is complemented with
 the tracker detector to increase the identification efficiency at the expense of delaying detection time.
@@ -9,15 +9,14 @@ An accurate identification of electrons and photons based on pure ECAL informati
 important in many analysis workflows.
 
 This study aims the identification of electrons and photons by simulating the signature of these particles
-in the ECAL detector. Charged pions are included in the simulation as they are frequently produced
-in LHC collisions. Our approach to deal with this supervised classification problem is based on
-artificial neural networks (NN). Two models are studied, the firt one is a shallow NN with fully connected
-layers while the second model involves convolutional layers.
+in the ECAL detector. Charged pions are included in the simulation as they arise frequently in the LHC collisions.
+Our approach to deal with this supervised classification problem is based on artificial neural networks (NN).
+Two models are studied, the first one is a shallow NN with fully connected layers, while the second model involves
+convolutional layers.
 
 Each classification model was trained in batches of 128 images during 10K steps (64 epochs).
 The energy threshold vary from 0 to 30 GeV in steps of 10 GeV.
 In terms of classification accuracy, the convolutional neural network outperforms the shallow model.
-The following table sumarizes the results.
 
 <table>
   <tr>
