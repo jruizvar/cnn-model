@@ -9,6 +9,9 @@ import tensorflow as tf
 
 tf.logging.set_verbosity(tf.logging.INFO)
 
+flags.DEFINE_float("threshold",
+                   default=0.,
+                   help="Energy threshold.")
 flags.DEFINE_float("learning_rate",
                    default=0.001,
                    help="Initial learning rate.")
@@ -61,7 +64,7 @@ def main(_):
     """ Load dataset.
         Execute custom estimator.
     """
-    dataset = load_dataset()
+    dataset = load_dataset(FLAGS.threshold)
 
     classifier = tf.estimator.Estimator(model_fn, FLAGS.model_dir)
 

@@ -14,7 +14,7 @@ import numpy as np
 import os
 
 
-DATADIR = '/Users/jose/Work/ml-physics/data'
+DATADIR = '/home/jose/work/ml-physics/data'
 
 ELEC = 'eminus_Ele-Eta0-PhiPiOver2-Energy50.npy'
 PHOT = 'gamma-Photon-Eta0-PhiPiOver2-Energy50.npy'
@@ -47,7 +47,7 @@ def read_data(threshold):
     return X[p], y[p]
 
 
-def load_dataset(threshold=0.0001):
+def load_dataset(threshold):
     """ Build dataset
     """
     X, y = read_data(threshold)
