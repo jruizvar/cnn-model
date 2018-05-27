@@ -20,10 +20,6 @@ The first model under study is a shallow NN with fully connected layers. The sec
 architecture based on convolutional layers. As a result, the convolutional NN outperforms the shallow model
 in terms of classification accuracy.
 
-Each model is trained on 4 different datasets created by selecting images with total energy above a threshold
-that varies from 0 to 30 GeV in steps of 10 GeV. Regardless of the threshold, we ensure 20K examples for training
-and 20K examples for validation. The optimization was run in batches of 128 images during 10K steps, for a total of 64 epochs.
-
 <table>
   <tr>
     <th colspan="6"><span style="font-weight:bold">Accuracy Results</span></th>
@@ -50,6 +46,10 @@ and 20K examples for validation. The optimization was run in batches of 128 imag
     <td>0.922</td>
   </tr>
 </table>
+
+Each model was trained on 4 different datasets created by selecting images with total energy above a threshold
+that varies from 0 to 30 GeV in steps of 10 GeV. Regardless of the threshold, we ensure 20K examples for training
+and 20K examples for validation. The optimization was run in batches of 128 images during 10K steps, for a total of 64 epochs.
 
 ## Python Modules
 
