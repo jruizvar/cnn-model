@@ -12,6 +12,7 @@ This study aims the identification of electrons and photons by simulating the si
 in the ECAL. Charged pions are included in the simulation as they arise frequently in LHC collisions.
 By looking at the energy distribution deposited by electrons, photons and pions, it is easy to set the
 pions appart. However, the signatures of electrons and photons are quite similar between themselves.
+
 ![](notebooks/energy.png)
 
 Our approach to deal with the supervised classification problem is based on artificial neural networks (NN).
