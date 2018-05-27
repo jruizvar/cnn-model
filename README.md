@@ -6,17 +6,22 @@ The Compact Muon Solenoid (CMS) detector from the CERN's Large Hadron Collider (
 calorimeter (ECAL) to identify electrons and photons. Usually, the ECAL information is complemented with
 the tracker detector to increase the identification efficiency at the expense of delaying detection time.
 An accurate identification of electrons and photons based on pure ECAL information would be extremely
-important in many analysis workflows.
+important for many analysis workflows.
 
 This study aims the identification of electrons and photons by simulating the signature of these particles
-in the ECAL detector. Charged pions are included in the simulation as they arise frequently in the LHC collisions.
-Our approach to deal with this supervised classification problem is based on artificial neural networks (NN).
-Two models are studied, the first one is a shallow NN with fully connected layers, while the second model involves
-convolutional layers.
+in the ECAL. Charged pions are included in the simulation as they arise frequently in LHC collisions.
+By looking at the energy distribution deposited by electrons, photons and pions, it is easy to set the
+pions appart. However, the signatures of electrons and photons are quite similar between themselves.
+![](notebooks/energy.png)
 
-Each classification model was trained in batches of 128 images during 10K steps (64 epochs).
-The energy threshold vary from 0 to 30 GeV in steps of 10 GeV.
-In terms of classification accuracy, the convolutional neural network outperforms the shallow model.
+Our approach to deal with the supervised classification problem is based on artificial neural networks (NN).
+The first model under study is a shallow NN with fully connected layers. The second model involves a more complex
+architecture based on convolutional layers. As a result, the convolutional NN outperforms the shallow model
+in terms of classification accuracy.
+
+Each model is trained on 4 different datasets created by selecting images with total energy above a threshold
+that varies from 0 to 30 GeV in steps of 10 GeV. Regardless of the threshold, we ensure 20K examples for training
+and 20K examples for validation. The optimization was run in batches of 128 images during 10K steps, for a total of 64 epochs.
 
 <table>
   <tr>
