@@ -9,7 +9,7 @@ lead tungstate (PbWO<sub>4</sub>) crystals. Most energy (approx. 94%) from a sin
 in 3x3 crystals.
 
 Usually, the ECAL information is complemented with other CMS subdetectors to increase the identification efficiency,
-at the expense of delaying detection time. An accurate identification of electrons and photons based on ECAL
+at the expense of delaying detection time. Therefore, an accurate identification of electrons and photons based on ECAL
 information at crystal level would be extremely important for many analysis workflows.
 This study aims the identification of electrons and photons by observing, at crystral level, the signature of
 these particles in the barrel section of the CMS ECAL. Charged pions are also taken into account as they frequently
@@ -17,11 +17,11 @@ arise in LHC collisions.
 
 We use a computer vision approach to deal with the analysis of the 2-dimensional energy distributions.
 Specifically, we solve a supervised classification problem considering three target classes: electrons,
-photons and pions. The classification model under study is based on artificial Neural Networks (NN) with
-convolutional layers. The model was trained on different datasets created by selecting images with total
-energy above a threshold that varies from 0 to 30 GeV in steps of 10 GeV. Regardless of the threshold, we
-ensure 20K examples for training and 20K examples for validation. The optimization routine was run in batches
-of 128 images during 10K steps for a total of 64 epochs.
+photons and pions. The classification model is based on artificial neural networks with convolutional layers.
+The model was trained on different datasets created by selecting images with total energy above a threshold
+that varies from 0 to 30 GeV in steps of 10 GeV. Regardless of the threshold, we ensure 20K examples for training
+and 20K examples for validation. The optimization routine was run in batches of 128 images during 10K steps, 
+for a total of 64 epochs. As a result, we achieved a classification accuracy of 93% in the best scenario.
 
 <table>
   <tr>
