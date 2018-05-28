@@ -19,7 +19,7 @@ We use a computer vision approach to deal with the analysis of the energy distri
 Specifically, we solve a supervised classification problem considering three target classes: electron,
 photon and pion. The classification model is based on artificial neural networks with convolutional layers.
 The model was trained on a datasets simulated by a particle gun with truth energy of 50 GeV.
-On top of the reconstructed energy with apply different thresholds from 0 to 30 GeV in steps of 10 GeV.
+On top of the reconstructed energy, we apply different thresholds from 0 to 30 GeV in steps of 10 GeV.
 Regardless of the threshold, we ensure 20K examples for training
 and 20K examples for validation. The optimization routine was executed in batches of 128 images during 10K steps, 
 for a total of 64 epochs. As a result, we achieved a classification accuracy of 93% in the best scenario.
