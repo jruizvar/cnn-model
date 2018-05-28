@@ -1,4 +1,4 @@
-# Electron, Photon and Pion Classification with <br/> Artificial Neural Networks
+# Crystal Level Identification of Particles with the <br/> CMS Electromagnetic Calorimeter
 ![](notebooks/image.png)
 
 The real time identification of particles is a challenging problem in high energy physics experiments.
