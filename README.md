@@ -4,8 +4,8 @@
 The real time identification of particles is a challenging problem in high energy physics experiments.
 The Compact Muon Solenoid (CMS) detector from the CERN's Large Hadron Collider (LHC) relies on the Electromagnetic
 Calorimeter (ECAL) to identify electrons and photons. The ECAL is composed by a barrel section and two endcaps.
-The barrel section is a cylinder of inner radius 1.3 m that comprises 61200 (170 around x 360 lenghtwise)
-lead tungstate (PbWO<sub>4</sub>) crystals. Most energy (approx. 94%) from a single particle is contained
+The barrel section is a cylinder of inner radius 1.3 m that comprises 61200 (170 around x 360 lengthwise)
+lead tungstate (PbWO<sub>4</sub>) crystals. Approximately 94% of the energy from a single particle is contained
 in 3x3 crystals.
 
 Usually, the ECAL information is complemented with other CMS subdetectors to increase the identification efficiency,
@@ -15,11 +15,12 @@ This study aims the identification of electrons and photons by observing, at cry
 these particles in the barrel section of the CMS ECAL. Charged pions are also taken into account as they frequently
 arise in LHC collisions. 
 
-We use a computer vision approach to deal with the analysis of the 2-dimensional energy distributions.
+We use a computer vision approach to deal with the analysis of the energy distributions.
 Specifically, we solve a supervised classification problem considering three target classes: electrons,
 photons and pions. The classification model is based on artificial neural networks with convolutional layers.
-The model was trained on different datasets created by selecting images with total energy above a threshold
-that varies from 0 to 30 GeV in steps of 10 GeV. Regardless of the threshold, we ensure 20K examples for training
+The model was trained on a datasets simulated by a particle gun with truth energy of 50 GeV.
+On top of the reconstructed energy with apply different thresholds from 0 to 30 GeV in steps of 10 GeV.
+Regardless of the threshold, we ensure 20K examples for training
 and 20K examples for validation. The optimization routine was run in batches of 128 images during 10K steps, 
 for a total of 64 epochs. As a result, we achieved a classification accuracy of 93% in the best scenario.
 
