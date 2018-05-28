@@ -2,23 +2,26 @@
 ![](notebooks/image.png)
 
 The real time identification of particles is a challenging problem in high energy physics experiments.
-The Compact Muon Solenoid (CMS) detector from the CERN's Large Hadron Collider (LHC) relies on the electromagnetic
-calorimeter (ECAL) to identify electrons and photons. Usually, the ECAL information is complemented with
-the tracker detector to increase the identification efficiency at the expense of delaying detection time.
-An accurate identification of electrons and photons based on pure ECAL information would be extremely
-important for many analysis workflows.
+The Compact Muon Solenoid (CMS) detector from the CERN's Large Hadron Collider (LHC) relies on the Electromagnetic
+Calorimeter (ECAL) to identify electrons and photons. The ECAL is composed by a barrel section and two endcaps.
+The barrel section is a cylinder of inner radius 1.3 m that comprises 61200 (170 around x 360 lenghtwise)
+lead tungstate (PbWO<sub>4</sub>) crystals. Most energy (approx. 94%) from a single particle is contained
+in 3x3 crystals.
 
-This study aims the identification of electrons and photons by simulating the signature of these particles
-in the ECAL. Charged pions are included in the simulation as they arise frequently in LHC collisions.
-By looking at the energy distribution deposited by electrons, photons and pions, it is straightforward to set the
-pions apart. However, the signatures of electrons and photons are quite similar between themselves.
+Usually, the ECAL information is complemented with other CMS subdetectors to increase the identification efficiency,
+at the expense of delaying detection time. An accurate identification of electrons and photons based on ECAL
+information at crystal level would be extremely important for many analysis workflows.
+This study aims the identification of electrons and photons by observing, at crystral level, the signature of
+these particles in the barrel section of the CMS ECAL. Charged pions are also taken into account as they frequently
+arise in LHC collisions. 
 
-![](notebooks/energy.png)
-
-Our approach to deal with the supervised classification problem is based on artificial neural networks (NN).
-The first model under study is a shallow NN with fully connected layers. The second model involves a more complex
-architecture based on convolutional layers. As a result, the convolutional NN outperforms the shallow model
-in terms of classification accuracy.
+We use a computer vision approach to deal with the analysis of the 2-dimensional energy distributions.
+Specifically, we solve a supervised classification problem considering three target classes: electrons,
+photons and pions. The classification model under study is based on artificial Neural Networks (NN) with
+convolutional layers. The model was trained on different datasets created by selecting images with total
+energy above a threshold that varies from 0 to 30 GeV in steps of 10 GeV. Regardless of the threshold, we
+ensure 20K examples for training and 20K examples for validation. The optimization routine was run in batches
+of 128 images during 10K steps for a total of 64 epochs.
 
 <table>
   <tr>
@@ -47,10 +50,6 @@ in terms of classification accuracy.
   </tr>
 </table>
 
-Each model was trained on 4 different datasets created by selecting images with total energy above a threshold
-that varies from 0 to 30 GeV in steps of 10 GeV. Regardless of the threshold, we ensure 20K examples for training
-and 20K examples for validation. The optimization was run in batches of 128 images during 10K steps, for a total of 64 epochs.
-
 ## Python Modules
 
 ## [custom_dataset.py](python/custom_dataset.py)
@@ -61,5 +60,3 @@ and 20K examples for validation. The optimization was run in batches of 128 imag
 
 ## [custom_estimator.py](python/custom_estimator.py)
 - Build a classifier using [tf.estimator](https://www.tensorflow.org/api_docs/python/tf/estimator) API.
-
-
