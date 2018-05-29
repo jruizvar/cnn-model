@@ -11,7 +11,6 @@ from collections import namedtuple
 import numpy as np
 import os
 
-
 DATADIR = '/home/jose/work/ml-physics/data'
 
 ELEC = 'eminus_Ele-Eta0-PhiPiOver2-Energy50.npy'
@@ -51,13 +50,12 @@ def load_dataset(threshold):
     """
     X, y = read_data(threshold)
 
+    X = np.reshape(X, [-1, 28, 28, 1])
+
     m = min(len(y), 40000)
 
     X_train, X_eval = X[:m//2], X[m//2:m]
     y_train, y_eval = y[:m//2], y[m//2:m]
-
-    X_train = np.reshape(X_train, [-1, 28, 28, 1])
-    X_eval = np.reshape(X_eval, [-1, 28, 28, 1])
 
     Samples = namedtuple('Samples', 'images labels')
     Dataset = namedtuple('Dataset', 'train validation')
