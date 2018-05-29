@@ -10,11 +10,11 @@ stuck onto the back of each crystal.
 The ECAL barrel is a cylinder of 1.3 m inner radius with 61200 crystals = 170 around x 360 lengthwise.
 Approximately 94% of the energy from a single particle is contained in 3x3 crystal towers.
 Usually, the ECAL information is complemented with other CMS subdetectors to increase the identification efficiency,
-at the expense of delaying detection time. Therefore, an accurate identification of electrons and photons based on ECAL
-information at crystal level would be extremely important for many analyses.
+at the expense of delaying detection time. Therefore, an accurate identification of electrons and photons based on
+pure ECAL information at crystal level would be extremely important for many analyses.
 
 This study aims the identification of electrons and photons by observing, at crystal level, the signature of
-these particles in the barrel section of the CMS ECAL. Charged pions are also taken into account as they frequently
+these particles in the ECAL barrel. Charged pions are also taken into account as they frequently
 arise in LHC collisions. We use a computer vision approach to deal with the analysis of the energy distributions.
 Specifically, we solve a supervised classification problem considering three target classes: electron,
 photon and pion.
