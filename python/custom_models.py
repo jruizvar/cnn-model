@@ -49,10 +49,23 @@ def cnn(inputs, training):
         units=1024,
         activation=tf.nn.relu)
     dropout = tf.layers.dropout(
-        dense, rate=0.4,
+        dense,
+        rate=0.4,
         training=training)
     logits = tf.layers.dense(
         dropout,
         units=3,
         activation=None)
     return logits
+
+
+if __name__ == '__main__':
+    """ Profile model parameters
+    """
+    inputs = tf.random_uniform([1, 28, 28, 1])
+    logits = cnn(inputs, True)
+    param_stats = tf.profiler.profile(
+            tf.get_default_graph(),
+            options=tf.profiler.ProfileOptionBuilder
+            .trainable_variables_parameter())
+    print(f'total_params: {param_stats.total_parameters}')
