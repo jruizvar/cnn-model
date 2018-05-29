@@ -9,7 +9,7 @@ stuck onto the back of each crystal.
 
 The ECAL barrel is a cylinder of 1.3 m inner radius with 61200 crystals = 170 around x 360 lengthwise.
 Approximately 94% of the energy from a single particle is contained in 3x3 crystal towers.
-Usually, the ECAL information is complemented with other CMS subdetectors to increase the identification efficiency,
+Usually, the ECAL information is complemented with other CMS subdetectors to improve the identification efficiency,
 at the expense of delaying detection time. Therefore, an accurate identification of electrons and photons based on
 pure ECAL information at crystal level would be extremely important for many analyses.
 
