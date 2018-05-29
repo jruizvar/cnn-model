@@ -1,4 +1,4 @@
-""" Build a model to classify the images in the custom dataset
+""" Build a classification model using tf.estimator API
 """
 from absl import flags
 from custom_dataset import load_dataset
@@ -31,7 +31,6 @@ def model_fn(features, labels, mode):
     """
     inputs = features['x']
     logits = cnn(inputs, mode == tf.estimator.ModeKeys.TRAIN)
-    # logits = nn(inputs)
 
     predictions = {
         'classes': tf.argmax(logits, axis=1),
