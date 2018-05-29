@@ -1,15 +1,13 @@
-""" Custom dataset
-
-    Comprises 20K training examples and 20K test examples
-    of the CMS electromagnetic calorimeter, formatted
+""" Comprises 20K training examples and 20K test examples
+    of the CMS electromagnetic calorimeter formatted
     as 28x28 pixel monochromatic images.
 
-    The images are labeled as follows:
-
-        Electron --> 0
-        Photon   --> 1
-        Pion     --> 2
+    Label convention: Electron --> 0
+                      Photon   --> 1
+                      Pion     --> 2
 """
+from collections import namedtuple
+
 import numpy as np
 import os
 
@@ -48,7 +46,8 @@ def read_data(threshold):
 
 
 def load_dataset(threshold):
-    """ Build dataset
+    """ Split into training and validation sets.
+        Return namedtuple.
     """
     X, y = read_data(threshold)
 
@@ -57,30 +56,22 @@ def load_dataset(threshold):
     X_train, X_eval = X[:m//2], X[m//2:m]
     y_train, y_eval = y[:m//2], y[m//2:m]
 
-    class Dataset(object):
-        def __repr__(self):
-            return self.__class__.__name__
+    X_train = np.reshape(X_train, [-1, 28, 28, 1])
+    X_eval = np.reshape(X_eval, [-1, 28, 28, 1])
 
-    dataset = Dataset()
-    dataset.train = Dataset()
-    dataset.validation = Dataset()
+    Samples = namedtuple('Samples', 'images labels')
+    Dataset = namedtuple('Dataset', 'train validation')
 
-    dataset.train.images = np.reshape(X_train, [-1, 28, 28, 1])
-    dataset.train.labels = y_train
-    dataset.train.num_examples = len(y_train)
-
-    dataset.validation.images = np.reshape(X_eval, [-1, 28, 28, 1])
-    dataset.validation.labels = y_eval
-    dataset.validation.num_examples = len(y_eval)
-    return dataset
+    return Dataset(Samples(X_train, y_train), Samples(X_eval, y_eval))
 
 
 if __name__ == '__main__':
     dataset = load_dataset(threshold=10.)
-    print(dataset)
-    train_data = dataset.train.images
-    eval_data = dataset.validation.images
-    print(train_data.shape)
-    print(eval_data.shape)
-    print(train_data.max())
-    print(eval_data.max())
+    train_images = dataset.train.images
+    train_labels = dataset.train.labels
+    eval_images = dataset.validation.images
+    eval_labels = dataset.validation.labels
+    print(train_images.shape)
+    print(train_labels.shape)
+    print(eval_images.shape)
+    print(eval_labels.shape)
