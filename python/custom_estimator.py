@@ -4,7 +4,6 @@ from absl import flags
 from custom_dataset import load_dataset
 from custom_models import cnn
 
-import numpy as np
 import tensorflow as tf
 
 tf.logging.set_verbosity(tf.logging.INFO)
@@ -32,6 +31,7 @@ def model_fn(features, labels, mode):
     """
     inputs = features['x']
     logits = cnn(inputs, mode == tf.estimator.ModeKeys.TRAIN)
+    # logits = nn(inputs)
 
     predictions = {
         'classes': tf.argmax(logits, axis=1),
