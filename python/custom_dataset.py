@@ -17,8 +17,6 @@ ELEC = 'eminus_Ele-Eta0-PhiPiOver2-Energy50.npy'
 PHOT = 'gamma-Photon-Eta0-PhiPiOver2-Energy50.npy'
 PION = 'piminus_Pion-Eta0-PhiPiOver2-Energy50.npy'
 
-np.random.seed(42)
-
 
 def read_data(threshold):
     """ Read numpy arrays.

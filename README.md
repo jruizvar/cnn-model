@@ -4,8 +4,8 @@
 The real time identification of particles is a challenging problem in high energy physics experiments.
 The Compact Muon Solenoid (CMS) detector from the CERN's Large Hadron Collider (LHC) relies on the Electromagnetic
 Calorimeter (ECAL) to identify electrons and photons. The ECAL is composed by a barrel section and two endcaps.
-The primary materials of the ECAL are lead-tungstate (PbWO<sub>4</sub>) crystals equipped with photodetectors
-stuck onto the back of each crystal.
+The primary detection materials of the ECAL are lead-tungstate (PbWO<sub>4</sub>) crystals equipped with
+photodetectors stuck onto the back of each crystal.
 
 The ECAL barrel is a cylinder of 1.3 m inner radius with 61200 crystals = 170 around x 360 lengthwise.
 Approximately 94% of the energy from a single particle is contained in 3x3 crystal towers.

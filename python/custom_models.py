@@ -46,11 +46,11 @@ def cnn(inputs, training):
         strides=2)
     dense = tf.layers.dense(
         tf.reshape(pool2, [-1, 7*7*64]),
-        units=1024,
+        units=256,
         activation=tf.nn.relu)
     dropout = tf.layers.dropout(
         dense,
-        rate=0.4,
+        rate=0.5,
         training=training)
     logits = tf.layers.dense(
         dropout,

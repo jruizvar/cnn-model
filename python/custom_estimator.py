@@ -9,7 +9,7 @@ import tensorflow as tf
 tf.logging.set_verbosity(tf.logging.INFO)
 
 flags.DEFINE_float("threshold",
-                   default=0.,
+                   default=10.,
                    help="Energy threshold.")
 flags.DEFINE_float("learning_rate",
                    default=0.001,
@@ -18,7 +18,7 @@ flags.DEFINE_integer("batch_size",
                      default=128,
                      help="Batch size.")
 flags.DEFINE_integer("steps",
-                     default=100,
+                     default=625,
                      help="Number of steps.")
 flags.DEFINE_string("model_dir",
                     default="/tmp/model_dir",
