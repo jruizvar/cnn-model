@@ -20,6 +20,9 @@ flags.DEFINE_integer("batch_size",
 flags.DEFINE_integer("steps",
                      default=625,
                      help="Number of steps.")
+flags.DEFINE_integer("checkpoints",
+                     default=16,
+                     help="Number of checkpoints.")
 flags.DEFINE_string("model_dir",
                     default="/tmp/model_dir",
                     help="Directory where model is stored.")
@@ -65,9 +68,9 @@ def main(_):
         Execute custom estimator.
     """
     dataset = load_dataset(FLAGS.threshold)
-
     classifier = tf.estimator.Estimator(model_fn, FLAGS.model_dir)
-    for _ in range(16):
+    for i in range(FLAGS.checkpoints):
+        print(f'\nCheckpoint {i+1}')
         classifier.train(
             input_fn=tf.estimator.inputs.numpy_input_fn(
                 x={'x': dataset.train.images},
@@ -76,14 +79,12 @@ def main(_):
                 num_epochs=None,
                 shuffle=True),
             steps=FLAGS.steps)
-
         eval_results = classifier.evaluate(
             input_fn=tf.estimator.inputs.numpy_input_fn(
                 x={'x': dataset.validation.images},
                 y=dataset.validation.labels,
                 num_epochs=1,
                 shuffle=False))
-
         print(eval_results)
 
 
