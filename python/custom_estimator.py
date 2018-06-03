@@ -42,8 +42,10 @@ def model_fn(features, labels, mode):
             predictions=predictions)
 
     loss = tf.losses.sparse_softmax_cross_entropy(labels, logits)
+    accuracy = tf.metrics.accuracy(labels, predictions['classes'])
 
     if mode == tf.estimator.ModeKeys.TRAIN:
+        tf.summary.scalar('train_accuracy', accuracy[1])
         return tf.estimator.EstimatorSpec(
             mode=mode,
             loss=loss,
@@ -55,8 +57,7 @@ def model_fn(features, labels, mode):
     return tf.estimator.EstimatorSpec(
         mode=mode,
         loss=loss,
-        eval_metric_ops={
-            'accuracy': tf.metrics.accuracy(labels, predictions['classes'])})
+        eval_metric_ops={'eval_accuracy': accuracy})
 
 
 def main(_):
@@ -66,24 +67,24 @@ def main(_):
     dataset = load_dataset(FLAGS.threshold)
 
     classifier = tf.estimator.Estimator(model_fn, FLAGS.model_dir)
+    for _ in range(16):
+        classifier.train(
+            input_fn=tf.estimator.inputs.numpy_input_fn(
+                x={'x': dataset.train.images},
+                y=dataset.train.labels,
+                batch_size=FLAGS.batch_size,
+                num_epochs=None,
+                shuffle=True),
+            steps=FLAGS.steps)
 
-    classifier.train(
-        input_fn=tf.estimator.inputs.numpy_input_fn(
-            x={'x': dataset.train.images},
-            y=dataset.train.labels,
-            batch_size=FLAGS.batch_size,
-            num_epochs=None,
-            shuffle=True),
-        steps=FLAGS.steps)
+        eval_results = classifier.evaluate(
+            input_fn=tf.estimator.inputs.numpy_input_fn(
+                x={'x': dataset.validation.images},
+                y=dataset.validation.labels,
+                num_epochs=1,
+                shuffle=False))
 
-    eval_results = classifier.evaluate(
-        input_fn=tf.estimator.inputs.numpy_input_fn(
-            x={'x': dataset.validation.images},
-            y=dataset.validation.labels,
-            num_epochs=1,
-            shuffle=False))
-
-    print(eval_results)
+        print(eval_results)
 
 
 if __name__ == '__main__':
