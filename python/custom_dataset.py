@@ -15,15 +15,19 @@ DATADIR = '/home/jose/work/ml-physics/data'
 IMAGES = 'eplus_Ele-Eta0PhiPiOver2-Energy20to100_V2.npy'
 LABELS = 'eplus_Ele-Eta0PhiPiOver2-Energy20to100_V2.txt'
 
+ENERGY_NORM_FACTOR = 100.
+
 
 def read_data(threshold):
     """ Read numpy arrays.
         Select images with energy above the threshold.
+        Return images and normalized labels.
     """
     images = np.load(os.path.join(DATADIR, IMAGES))
     labels = np.loadtxt(os.path.join(DATADIR, LABELS), np.float32)
     p = [i for i, img in enumerate(images) if np.sum(img) > threshold]
-    return images[p], labels[p]
+
+    return images[p], labels[p]/ENERGY_NORM_FACTOR
 
 
 def load_dataset(threshold):
@@ -44,4 +48,4 @@ def load_dataset(threshold):
 
 if __name__ == '__main__':
     dataset = load_dataset(threshold=10.)
-    print(dataset.train.labels.dtype)
+    print(dataset.train.labels.max())
