@@ -1,7 +1,7 @@
 """ Comprises 3K training examples and 3K test examples
     of the CMS electromagnetic calorimeter formatted
     as 28x28 pixel monochromatic images.
-    The images are label with the Monte Carlo truth energy.
+    The images are labeled with the normalized truth energy.
 """
 from collections import namedtuple
 

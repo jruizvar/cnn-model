@@ -2,7 +2,7 @@
 """
 from absl import flags
 from custom_dataset import load_dataset
-from custom_models import cnn
+from custom_models import nn
 
 import tensorflow as tf
 
@@ -18,10 +18,10 @@ flags.DEFINE_integer("batch_size",
                      default=128,
                      help="Batch size.")
 flags.DEFINE_integer("steps",
-                     default=100,
+                     default=1,
                      help="Number of steps.")
 flags.DEFINE_integer("checkpoints",
-                     default=15,
+                     default=50,
                      help="Number of checkpoints.")
 flags.DEFINE_string("model_dir",
                     default="/tmp/model_dir",
@@ -33,7 +33,7 @@ def model_fn(features, labels, mode):
     """ Model function
     """
     inputs = features['x']
-    logits = cnn(inputs, mode == tf.estimator.ModeKeys.TRAIN)
+    logits = nn(inputs)
 
     predictions = tf.squeeze(logits, axis=1)
 
