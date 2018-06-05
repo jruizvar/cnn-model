@@ -1,4 +1,4 @@
-""" Build a classification model using tf.estimator API
+""" Build a regression model using tf.estimator API
 """
 from absl import flags
 from custom_dataset import load_dataset
@@ -18,10 +18,10 @@ flags.DEFINE_integer("batch_size",
                      default=128,
                      help="Batch size.")
 flags.DEFINE_integer("steps",
-                     default=625,
+                     default=100,
                      help="Number of steps.")
 flags.DEFINE_integer("checkpoints",
-                     default=16,
+                     default=15,
                      help="Number of checkpoints.")
 flags.DEFINE_string("model_dir",
                     default="/tmp/model_dir",
@@ -35,20 +35,18 @@ def model_fn(features, labels, mode):
     inputs = features['x']
     logits = cnn(inputs, mode == tf.estimator.ModeKeys.TRAIN)
 
-    predictions = {
-        'classes': tf.argmax(logits, axis=1),
-        'probabilities': tf.nn.softmax(logits)}
+    predictions = tf.squeeze(logits, axis=1)
 
     if mode == tf.estimator.ModeKeys.PREDICT:
         return tf.estimator.EstimatorSpec(
             mode=mode,
             predictions=predictions)
 
-    loss = tf.losses.sparse_softmax_cross_entropy(labels, logits)
-    accuracy = tf.metrics.accuracy(labels, predictions['classes'])
+    loss = tf.losses.mean_squared_error(labels, predictions)
+    rmse = tf.metrics.root_mean_squared_error(labels, predictions)
 
     if mode == tf.estimator.ModeKeys.TRAIN:
-        tf.summary.scalar('train_accuracy', accuracy[1])
+        tf.summary.scalar('train_rmse', rmse[1])
         return tf.estimator.EstimatorSpec(
             mode=mode,
             loss=loss,
@@ -60,7 +58,7 @@ def model_fn(features, labels, mode):
     return tf.estimator.EstimatorSpec(
         mode=mode,
         loss=loss,
-        eval_metric_ops={'eval_accuracy': accuracy})
+        eval_metric_ops={'eval_rmse': rmse})
 
 
 def main(_):

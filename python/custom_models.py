@@ -16,7 +16,7 @@ def nn(inputs):
         activation=tf.nn.relu)
     logits = tf.layers.dense(
         dense2,
-        units=3,
+        units=1,
         activation=None)
     return logits
 
@@ -54,7 +54,7 @@ def cnn(inputs, training):
         training=training)
     logits = tf.layers.dense(
         dropout,
-        units=3,
+        units=1,
         activation=None)
     return logits
 

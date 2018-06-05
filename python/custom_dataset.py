@@ -1,10 +1,7 @@
-""" Comprises 20K training examples and 20K test examples
+""" Comprises 3K training examples and 3K test examples
     of the CMS electromagnetic calorimeter formatted
     as 28x28 pixel monochromatic images.
-
-    Label convention: Electron --> 0
-                      Photon   --> 1
-                      Pion     --> 2
+    The images are label with the Monte Carlo truth energy.
 """
 from collections import namedtuple
 
@@ -15,33 +12,18 @@ np.random.seed(42)
 
 DATADIR = '/home/jose/work/ml-physics/data'
 
-ELEC = 'eminus_Ele-Eta0-PhiPiOver2-Energy50.npy'
-PHOT = 'gamma-Photon-Eta0-PhiPiOver2-Energy50.npy'
-PION = 'piminus_Pion-Eta0-PhiPiOver2-Energy50.npy'
+IMAGES = 'eplus_Ele-Eta0PhiPiOver2-Energy20to100_V2.npy'
+LABELS = 'eplus_Ele-Eta0PhiPiOver2-Energy20to100_V2.txt'
 
 
 def read_data(threshold):
     """ Read numpy arrays.
         Select images with energy above the threshold.
-        Assign labels and concatenate arrays.
-        Finally, shuffles and returns.
     """
-    elec = np.load(os.path.join(DATADIR, ELEC))
-    phot = np.load(os.path.join(DATADIR, PHOT))
-    pion = np.load(os.path.join(DATADIR, PION))
-
-    elec = np.array([i for i in elec if np.sum(i) > threshold])
-    phot = np.array([i for i in phot if np.sum(i) > threshold])
-    pion = np.array([i for i in pion if np.sum(i) > threshold])
-
-    zeros = np.zeros(elec.shape[0], np.int32)
-    ones = np.ones(phot.shape[0], np.int32)
-    twos = 1 + np.ones(pion.shape[0], np.int32)
-
-    y = np.concatenate((zeros, ones, twos))
-    X = np.concatenate((elec, phot, pion))
-    p = np.random.permutation(len(y))
-    return X[p], y[p]
+    images = np.load(os.path.join(DATADIR, IMAGES))
+    labels = np.loadtxt(os.path.join(DATADIR, LABELS), np.float32)
+    p = [i for i, img in enumerate(images) if np.sum(img) > threshold]
+    return images[p], labels[p]
 
 
 def load_dataset(threshold):
@@ -50,7 +32,7 @@ def load_dataset(threshold):
     """
     X, y = read_data(threshold)
     X = np.reshape(X, [-1, 28, 28, 1])
-    m = min(len(y), 40000)
+    m = min(len(y), 6000)
 
     X_train, X_val = X[:m//2], X[m//2:m]
     y_train, y_val = y[:m//2], y[m//2:m]
@@ -62,6 +44,4 @@ def load_dataset(threshold):
 
 if __name__ == '__main__':
     dataset = load_dataset(threshold=10.)
-    train_images = dataset.train.images
-    print(train_images.shape)
-    print(train_images.max())
+    print(dataset.train.labels.dtype)
