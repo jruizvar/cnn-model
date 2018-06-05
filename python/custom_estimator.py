@@ -42,22 +42,25 @@ def model_fn(features, labels, mode):
             mode=mode,
             predictions=predictions)
 
-    loss = tf.losses.mean_squared_error(labels, predictions)
+    average_loss = tf.losses.mean_squared_error(labels, predictions)
+    batch_size = tf.shape(labels)[0]
+    total_loss = tf.to_float(batch_size) * average_loss
+
     rmse = tf.metrics.root_mean_squared_error(labels, predictions)
 
     if mode == tf.estimator.ModeKeys.TRAIN:
         tf.summary.scalar('train_rmse', rmse[1])
         return tf.estimator.EstimatorSpec(
             mode=mode,
-            loss=loss,
+            loss=total_loss,
             train_op=tf.train.AdamOptimizer(
                 learning_rate=FLAGS.learning_rate).minimize(
-                    loss=loss,
+                    loss=average_loss,
                     global_step=tf.train.get_global_step()))
 
     return tf.estimator.EstimatorSpec(
         mode=mode,
-        loss=loss,
+        loss=total_loss,
         eval_metric_ops={'eval_rmse': rmse})
 
 
