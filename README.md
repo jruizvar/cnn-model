@@ -1,23 +1,27 @@
 # Energy Regression
 
-The goal is to train a regression model that minimizes the experimental errors associated
-with the energy reconstruction in the CMS electromagnetic calorimeter.
+The goal is to train a regression model that minimizes the experimental error
+associated with the energy reconstruction in the CMS electromagnetic calorimeter.
 
-The results shown below correspond to the sample `eplus_Ele-Eta0PhiPiOver2-Energy20to100_V2.npy`.
+The results are based on the simulated sample
+
+- `eplus_Ele-Eta0PhiPiOver2-Energy20to100_V2.npy`.
 
 ![](notebooks/gen_energy.png)
 
 ## Baseline
 
-The root mean squared error [RMSE](python/custom_estimator.py#L58) measures the discrepancy
-between the reconstructed energy and the truth value. An initial baseline is the following:
+The root mean squared error [RMSE](python/custom_estimator.py#L58) measures
+the discrepancy between the reconstructed energy and the generated value.
+An initial baseline is:
 
 - RMSE = 0.171
 
 ![](notebooks/reco_vs_gen_energy.png)
 
-## Model Evaluation
-Our results demonstrate the good performance of a convolutional model at minimizing the [RMSE](python/custom_estimator.py#L58).
+## Machine Learning Models
+The good performance of a convolutional model at minimizing the
+[RMSE](python/custom_estimator.py#L58) is demonstrated below.
 
 <table>
   <tr>
@@ -47,14 +51,17 @@ Our results demonstrate the good performance of a convolutional model at minimiz
 </table>
 
 ## Learning Curve
-The [loss](python/custom_estimator.py#L45) is defined by the mean squared error between the labels and the model predictions.
-The horizonal axis represents the number of [steps](python/custom_estimator.py#L80). One epoch is equivalent to 100 steps.
+The [loss](python/custom_estimator.py#L45) is defined by the mean squared error
+between the labels and the model predictions. The horizonal axis represents the
+number of [steps](python/custom_estimator.py#L80). One epoch is equivalent to
+100 steps.
 
-The blue (orange) curve corresponds to the validation (training) sample. After one epoch the model seems to converge.
+The blue (orange) curve corresponds to the validation (training) sample.
 
 ![](doc/learning_curve.png)
 
-The evolution of the [RMSE](python/custom_estimator.py#L58) calculated for the validation sample is shown below.
+The evolution of the [RMSE](python/custom_estimator.py#L58) calculated for the
+validation sample is shown below.
 
 ![](doc/rmse.png)
 
@@ -67,10 +74,12 @@ The complete graph associated to the convolutional model is displayed below.
 ## Python Modules
 
 ## [custom_dataset.py](python/custom_dataset.py)
-- Create a dataset of training and validation examples with simulations of the CMS electromagnetic calorimeter.
+- Create a dataset of training and validation examples with simulations of the
+CMS electromagnetic calorimeter.
 
 ## [custom_models.py](python/custom_models.py)
 - Create models in [TensorFlow](https://www.tensorflow.org).
 
 ## [custom_estimator.py](python/custom_estimator.py)
-- Build a regression model using [tf.estimator](https://www.tensorflow.org/api_docs/python/tf/estimator) API.
+- Build a regression model using
+[tf.estimator](https://www.tensorflow.org/api_docs/python/tf/estimator) API.
