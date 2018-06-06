@@ -36,19 +36,21 @@ According to the metric [RMSE](python/custom_estimator.py#L58) the convolutional
 </table>
 
 ## Learning Curve
-The [loss](python/custom_estimator.py#L45) is define by the mean squared error between the labels and the model predictions.
-The blue (orange) curve corresponds to the validation (training) sample.
-The horizonal axis represents the number of [steps](python/custom_estimator.py#L80).
-One epoch is equivalent to 100 steps.
+The [loss](python/custom_estimator.py#L45) is defined by the mean squared error between the labels and the model predictions.
+The horizonal axis represents the number of [steps](python/custom_estimator.py#L80). One epoch is equivalent to 100 steps.
+
+The blue (orange) curve corresponds to the validation (training) sample. After one epoch the model seems to converge.
 
 ![](doc/learning_curve.png)
 
 ## Root Mean Squared Error (RMSE)
-This metric is calculated only for the validation sample.
+The evolution of the [RMSE](python/custom_estimator.py#L58) calculated for the validation sample is shown below.
 
 ![](doc/rmse.png)
 
 ## TensorBoard Graph
+
+The complete graph associated to the convolutional model is displayed below.
 
 ![](doc/graph.png)
 
