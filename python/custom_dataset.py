@@ -1,4 +1,4 @@
-""" Comprises 3K training examples and 3K test examples
+""" Comprises 3.2K training examples and 3.2K test examples
     of the CMS electromagnetic calorimeter formatted
     as 28x28 pixel monochromatic images.
     The images are labeled with the normalized truth energy.
@@ -27,7 +27,7 @@ def read_data(threshold):
     labels = np.loadtxt(os.path.join(DATADIR, LABELS), np.float32)
     p = [i for i, img in enumerate(images) if np.sum(img) > threshold]
 
-    return images[p], labels[p]/ENERGY_NORM_FACTOR
+    return images[p]/ENERGY_NORM_FACTOR, labels[p]/ENERGY_NORM_FACTOR
 
 
 def load_dataset(threshold):
@@ -36,7 +36,7 @@ def load_dataset(threshold):
     """
     X, y = read_data(threshold)
     X = np.reshape(X, [-1, 28, 28, 1])
-    m = min(len(y), 6000)
+    m = min(len(y), 6400)
 
     X_train, X_val = X[:m//2], X[m//2:m]
     y_train, y_val = y[:m//2], y[m//2:m]
@@ -48,4 +48,4 @@ def load_dataset(threshold):
 
 if __name__ == '__main__':
     dataset = load_dataset(threshold=10.)
-    print(dataset.train.labels.max())
+    print(dataset.train.images.max())

@@ -18,10 +18,10 @@ flags.DEFINE_integer("batch_size",
                      default=32,
                      help="Batch size.")
 flags.DEFINE_integer("steps",
-                     default=5,
+                     default=2,
                      help="Number of steps.")
 flags.DEFINE_integer("checkpoints",
-                     default=10,
+                     default=50,
                      help="Number of checkpoints.")
 flags.DEFINE_string("model_dir",
                     default="/tmp/model_dir",
@@ -46,10 +46,7 @@ def model_fn(features, labels, mode):
     batch_size = tf.shape(labels)[0]
     total_loss = tf.to_float(batch_size) * average_loss
 
-    rmse = tf.metrics.root_mean_squared_error(labels, predictions)
-
     if mode == tf.estimator.ModeKeys.TRAIN:
-        tf.summary.scalar('train_rmse', rmse[1])
         return tf.estimator.EstimatorSpec(
             mode=mode,
             loss=total_loss,
@@ -58,10 +55,11 @@ def model_fn(features, labels, mode):
                     loss=average_loss,
                     global_step=tf.train.get_global_step()))
 
+    rmse = tf.metrics.root_mean_squared_error(labels, predictions)
     return tf.estimator.EstimatorSpec(
         mode=mode,
         loss=total_loss,
-        eval_metric_ops={'eval_rmse': rmse})
+        eval_metric_ops={'rmse': rmse})
 
 
 def main(_):
