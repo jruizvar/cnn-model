@@ -6,7 +6,8 @@ The results shown below correspond to the sample `eplus_Ele-Eta0PhiPiOver2-Energ
 
 ## Baseline
 
-The root mean squared error measures the discrepancy between the reconstructed energy and the truth value.
+The root mean squared error [RMSE](python/custom_estimator.py#L58) measures the discrepancy between the reconstructed energy and the truth value.
+An initial baseline is the following:
 
 - RMSE = 0.171
 
@@ -15,7 +16,7 @@ The root mean squared error measures the discrepancy between the reconstructed e
 The goal is to train a regression model that minimizes the RSME.
 
 ## Model Evaluation
-According to the metric [RMSE](python/custom_estimator.py#L58) the convolutional model seems to be the best option.
+According to the [RMSE](python/custom_estimator.py#L58) the convolutional model seems to be the best option.
 
 <table>
   <tr>
