@@ -1,21 +1,13 @@
 # Energy Regression
+Resuls obtained for the sample `eplus_Ele-Eta0PhiPiOver2-Energy20to100_V2.npy`.
 
-## Graph
 
-![](doc/graph.png)
-
-## Learning Curve
-The blue (orange) curve corresponds to the validation (training) sample.
-
-![](doc/learning_curve.png)
-
-## Root Mean Squared Error
-
-![](doc/rmse.png)
+## Model Evaluation
+According to the RMSE metric the convolutional model outperforms the shallow model.
 
 <table>
   <tr>
-    <th colspan="6"><span style="font-weight:bold">RMSE Results</span></th>
+    <th colspan="6"><span style="font-weight:bold">RMSE results</span></th>
   </tr>
   <tr>
     <td>Model \ Energy threshold</td>
@@ -26,19 +18,32 @@ The blue (orange) curve corresponds to the validation (training) sample.
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/master/python/custom_models.py#L6-L21">Shallow NN</a></td>
-    <td>0.122</td>
-    <td>0.067</td>
-    <td>0.060</td>
-    <td>0.070</td>
+    <td>0.194</td>
+    <td>0.177</td>
+    <td>0.485</td>
+    <td>0.351</td>
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/master/python/custom_models.py#L24-L59">Convolutional NN</a></td>
     <td>0.122</td>
-    <td>0.067</td>
-    <td>0.060</td>
-    <td>0.070</td>
+    <td>0.068</td>
+    <td>0.077</td>
+    <td>0.075</td>
   </tr>
 </table>
+
+## TensorBoard Graph
+
+![](doc/graph.png)
+
+## Learning Curve
+The blue (orange) curve corresponds to the validation (training) sample.
+
+![](doc/learning_curve.png)
+
+## Root Mean Squared Error (RMSE)
+
+![](doc/rmse.png)
 
 ## Python Modules
 
@@ -49,4 +54,4 @@ The blue (orange) curve corresponds to the validation (training) sample.
 - Create models in [TensorFlow](https://www.tensorflow.org).
 
 ## [custom_estimator.py](python/custom_estimator.py)
-- Build a regressor using [tf.estimator](https://www.tensorflow.org/api_docs/python/tf/estimator) API.
+- Build a regression model using [tf.estimator](https://www.tensorflow.org/api_docs/python/tf/estimator) API.
