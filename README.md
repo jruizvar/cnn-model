@@ -54,7 +54,6 @@ The blue (orange) curve corresponds to the validation (training) sample. After o
 
 ![](doc/learning_curve.png)
 
-## Root Mean Squared Error (RMSE)
 The evolution of the [RMSE](python/custom_estimator.py#L58) calculated for the validation sample is shown below.
 
 ![](doc/rmse.png)
