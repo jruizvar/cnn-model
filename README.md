@@ -1,6 +1,9 @@
 # Energy Regression
-Resuls obtained for the sample `eplus_Ele-Eta0PhiPiOver2-Energy20to100_V2.npy`.
+The regression study intends to train a model that determines the energy of a calorimetric image.
 
+The resuls shown below correspond to the sample `eplus_Ele-Eta0PhiPiOver2-Energy20to100_V2.npy`.
+
+![](notebooks/gen_energy.png)
 
 ## Model Evaluation
 According to the RMSE metric the convolutional model outperforms the shallow model.
