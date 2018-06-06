@@ -35,14 +35,14 @@ The good performance of a convolutional model at minimizing the
     <td>30 GeV</td>
   </tr>
   <tr>
-    <td><a href="https://github.com/jruizvar/ml-physics/blob/master/python/custom_models.py#L6-L21">Shallow NN</a></td>
+    <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L6-L21">Shallow NN</a></td>
     <td>0.194</td>
     <td>0.177</td>
     <td>0.485</td>
     <td>0.351</td>
   </tr>
   <tr>
-    <td><a href="https://github.com/jruizvar/ml-physics/blob/master/python/custom_models.py#L24-L59">Convolutional NN</a></td>
+    <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L24-L59">Convolutional NN</a></td>
     <td>0.122</td>
     <td>0.068</td>
     <td>0.077</td>
