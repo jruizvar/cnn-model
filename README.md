@@ -1,12 +1,12 @@
 # Energy Regression
 The regression study intends to train a model that determines the energy of a calorimetric image.
 
-The resuls shown below correspond to the sample `eplus_Ele-Eta0PhiPiOver2-Energy20to100_V2.npy`.
+The results shown below correspond to the sample `eplus_Ele-Eta0PhiPiOver2-Energy20to100_V2.npy`.
 
 ![](notebooks/gen_energy.png)
 
 ## Model Evaluation
-According to the RMSE metric the convolutional model outperforms the shallow model.
+According to the metric [RMSE](python/custom_estimator.py#L58) the convolutional model outperforms the shallow model.
 
 <table>
   <tr>
@@ -36,7 +36,7 @@ According to the RMSE metric the convolutional model outperforms the shallow mod
 </table>
 
 ## Learning Curve
-The [loss](python/custom_estimator.py#45) is define by the mean squared error between the labels and the model predictions.
+The [loss](python/custom_estimator.py#L45) is define by the mean squared error between the labels and the model predictions.
 The blue (orange) curve corresponds to the validation (training) sample.
 The horizonal axis represents the number of [steps](python/custom_estimator.py#L80).
 One epoch is equivalent to 100 steps.
