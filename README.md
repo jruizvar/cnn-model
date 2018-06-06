@@ -35,18 +35,22 @@ According to the RMSE metric the convolutional model outperforms the shallow mod
   </tr>
 </table>
 
-## TensorBoard Graph
-
-![](doc/graph.png)
-
 ## Learning Curve
+The [loss](python/custom_estimator.py#45) is define by the mean squared error between the labels and the model predictions.
 The blue (orange) curve corresponds to the validation (training) sample.
+The horizonal axis represents the number of [steps](python/custom_estimator.py#L80).
+One epoch is equivalent to 100 steps.
 
 ![](doc/learning_curve.png)
 
 ## Root Mean Squared Error (RMSE)
+This metric is calculated only for the validation sample.
 
 ![](doc/rmse.png)
+
+## TensorBoard Graph
+
+![](doc/graph.png)
 
 ## Python Modules
 
