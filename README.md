@@ -1,22 +1,23 @@
 # Energy Regression
 
+The goal is to train a regression model that minimizes the experimental errors associated
+with the energy reconstruction in the CMS electromagnetic calorimeter.
+
 The results shown below correspond to the sample `eplus_Ele-Eta0PhiPiOver2-Energy20to100_V2.npy`.
 
 ![](notebooks/gen_energy.png)
 
 ## Baseline
 
-The root mean squared error [RMSE](python/custom_estimator.py#L58) measures the discrepancy between the reconstructed energy and the truth value.
-An initial baseline is the following:
+The root mean squared error [RMSE](python/custom_estimator.py#L58) measures the discrepancy
+between the reconstructed energy and the truth value. An initial baseline is the following:
 
 - RMSE = 0.171
 
 ![](notebooks/reco_vs_gen_energy.png)
 
-The goal is to train a regression model that minimizes the RSME.
-
 ## Model Evaluation
-According to the [RMSE](python/custom_estimator.py#L58) the convolutional model seems to be the best option.
+Our results demonstrate the good performance of a convolutional model at minimizing the [RMSE](python/custom_estimator.py#L58).
 
 <table>
   <tr>
