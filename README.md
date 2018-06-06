@@ -1,12 +1,21 @@
 # Energy Regression
-The regression study intends to train a model that determines the energy of a calorimetric image.
 
 The results shown below correspond to the sample `eplus_Ele-Eta0PhiPiOver2-Energy20to100_V2.npy`.
 
 ![](notebooks/gen_energy.png)
 
+## Baseline
+
+The root mean squared error measures the discrepancy between the reconstructed energy and the truth value.
+
+- RMSE = 0.171
+
+![](notebooks/reco_vs_gen_energy.png)
+
+The goal is to train a regression model that minimizes the RSME.
+
 ## Model Evaluation
-According to the metric [RMSE](python/custom_estimator.py#L58) the convolutional model outperforms the shallow model.
+According to the metric [RMSE](python/custom_estimator.py#L58) the convolutional model seems to be the best option.
 
 <table>
   <tr>
