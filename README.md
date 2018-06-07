@@ -83,7 +83,7 @@ The evolution of the [RMSE](python/custom_estimator.py#L58) calculated for the
 validation sample is shown below, for the scenario with 10 GeV threshold.
 The horizonal axis represents the number of [steps](python/custom_estimator.py#L80).
 One epoch is equivalent to 100 steps, and the plot extends up to 20 epochs.
-From top to bottom, the curves correspond to the baseline model, linear regression,
+From top to bottom, the curves correspond to the linear regression, baseline model,
 shallow NN and convolutional NN.
 
 ![](doc/rmse.png)
