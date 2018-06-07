@@ -6,6 +6,20 @@ import tensorflow as tf
 def baseline(inputs, _):
     """ Baseline model
     """
+    energy = tf.reduce_sum(
+        tf.reshape(inputs, [-1, 28*28]),
+        axis=1,
+        keepdims=True)
+    logits = tf.layers.dense(
+        energy,
+        units=1,
+        activation=None)
+    return logits
+
+
+def linear_reg(inputs, _):
+    """ Linear regression
+    """
     logits = tf.layers.dense(
         tf.reshape(inputs, [-1, 28*28]),
         units=1,
@@ -73,6 +87,9 @@ if __name__ == '__main__':
     """ Profile model parameters
     """
     inputs = tf.random_uniform([1, 28, 28, 1])
+    # logits = baseline(inputs, True)
+    # logits = linear_reg(inputs, True)
+    # logits = nn(inputs, True)
     logits = cnn(inputs, True)
     param_stats = tf.profiler.profile(
             tf.get_default_graph(),
