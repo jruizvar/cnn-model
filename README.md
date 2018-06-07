@@ -9,8 +9,6 @@ The results are based on the simulated sample
 
 ![](notebooks/gen_energy.png)
 
-## Baseline
-
 The root mean squared error [RMSE](python/custom_estimator.py#L58) measures
 the discrepancy between the reconstructed energy and the generated value.
 
@@ -41,7 +39,7 @@ the discrepancy between the reconstructed energy and the generated value.
   </tr>
 </table>
 
-The good performance of a convolutional model at minimizing the
+The good performance of the neural networks at minimizing the
 [RMSE](python/custom_estimator.py#L58) is demonstrated below.
 
 <table>
@@ -56,43 +54,37 @@ The good performance of a convolutional model at minimizing the
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L6-L13">Baseline</a></td>
-    <td>0.207</td>
-    <td>0.303</td>
-    <td>0.350</td>
+    <td>0.574</td>
+    <td>0.488</td>
+    <td>0.363</td>
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L20-L27">Linear reg.</a></td>
-    <td>0.150</td>
-    <td>0.131</td>
-    <td>0.130</td>
+    <td>0.155</td>
+    <td>0.126</td>
+    <td>0.140</td>
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L30-L45">Shallow NN</a></td>
-    <td>0.134</td>
-    <td>0.053</td>
-    <td>0.038</td>
+    <td>0.130</td>
+    <td>0.044</td>
+    <td>0.039</td>
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L48-L83">Convolutional NN</a></td>
-    <td>0.088</td>
-    <td>0.054</td>
-    <td>0.040</td>
+    <td>0.076</td>
+    <td>0.046</td>
+    <td>0.041</td>
   </tr>
 </table>
 
 ## Learning Curve
-The [loss](python/custom_estimator.py#L45) is defined by the mean squared error
-between the labels and the model predictions. The horizonal axis represents the
-number of [steps](python/custom_estimator.py#L80). One epoch is equivalent to
-100 steps, and the plot below extends for 10 epochs.
-
-From top to bottom, the curves correspond to the baseline model, linear regression,
-shallow NN and convolutional NN.
-
-![](doc/learning_curve.png)
-
 The evolution of the [RMSE](python/custom_estimator.py#L58) calculated for the
 validation sample is shown below.
+The horizonal axis represents the number of [steps](python/custom_estimator.py#L80).
+One epoch is equivalent to 100 steps, and the plot extends up to 10 epochs.
+From top to bottom, the curves correspond to the baseline model, linear regression,
+shallow NN and convolutional NN.
 
 ![](doc/rmse.png)
 
@@ -114,3 +106,9 @@ CMS electromagnetic calorimeter.
 ## [custom_estimator.py](python/custom_estimator.py)
 - Build a regression model using
 [tf.estimator](https://www.tensorflow.org/api_docs/python/tf/estimator) API.
+
+Examples of usage:
+- `python custom_estimator.py --model baseline --threshold 0.`
+- `python custom_estimator.py --model linear_reg --threshold 0.`
+- `python custom_estimator.py --model nn --threshold 0.`
+- `python custom_estimator.py --model cnn --threshold 0.`
