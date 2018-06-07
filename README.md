@@ -13,9 +13,6 @@ The results are based on the simulated sample
 
 The root mean squared error [RMSE](python/custom_estimator.py#L58) measures
 the discrepancy between the reconstructed energy and the generated value.
-An initial baseline is:
-
-- RMSE = 0.171
 
 ![](notebooks/reco_vs_gen_energy.png)
 
@@ -87,9 +84,10 @@ The good performance of a convolutional model at minimizing the
 The [loss](python/custom_estimator.py#L45) is defined by the mean squared error
 between the labels and the model predictions. The horizonal axis represents the
 number of [steps](python/custom_estimator.py#L80). One epoch is equivalent to
-100 steps.
+100 steps, and the plot below extends for 10 epochs.
 
-The blue (orange) curve corresponds to the validation (training) sample.
+From top to bottom, the curves correspond to the baseline model, linear regression,
+shallow NN and convolutional NN.
 
 ![](doc/learning_curve.png)
 
