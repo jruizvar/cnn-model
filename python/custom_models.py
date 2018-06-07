@@ -3,7 +3,17 @@
 import tensorflow as tf
 
 
-def nn(inputs):
+def baseline(inputs, _):
+    """ Baseline model
+    """
+    logits = tf.layers.dense(
+        tf.reshape(inputs, [-1, 28*28]),
+        units=1,
+        activation=None)
+    return logits
+
+
+def nn(inputs, _):
     """ Shallow neural network
     """
     dense1 = tf.layers.dense(

@@ -2,7 +2,7 @@
 """
 from absl import flags
 from custom_dataset import load_dataset
-from custom_models import cnn
+from custom_models import baseline, nn, cnn
 
 import tensorflow as tf
 
@@ -18,14 +18,15 @@ flags.DEFINE_integer("batch_size",
                      default=32,
                      help="Batch size.")
 flags.DEFINE_integer("steps",
-                     default=2,
+                     default=100,
                      help="Number of steps.")
 flags.DEFINE_integer("checkpoints",
-                     default=50,
+                     default=20,
                      help="Number of checkpoints.")
-flags.DEFINE_string("model_dir",
-                    default="/tmp/model_dir",
-                    help="Directory where model is stored.")
+flags.DEFINE_string("model",
+                    default="baseline",
+                    help="Select model between baseline, nn or cnn")
+
 FLAGS = flags.FLAGS
 
 
@@ -33,7 +34,7 @@ def model_fn(features, labels, mode):
     """ Model function
     """
     inputs = features['x']
-    logits = cnn(inputs, mode == tf.estimator.ModeKeys.TRAIN)
+    logits = eval(f'{FLAGS.model}(inputs, mode==tf.estimator.ModeKeys.TRAIN)')
 
     predictions = tf.squeeze(logits, axis=1)
 
@@ -67,7 +68,8 @@ def main(_):
         Execute custom estimator.
     """
     dataset = load_dataset(FLAGS.threshold)
-    classifier = tf.estimator.Estimator(model_fn, FLAGS.model_dir)
+    model_dir = f'./results{int(FLAGS.threshold)}/{FLAGS.model}'
+    classifier = tf.estimator.Estimator(model_fn, model_dir)
     for i in range(FLAGS.checkpoints):
         print(f'\nCheckpoint {i+1}')
         classifier.train(
