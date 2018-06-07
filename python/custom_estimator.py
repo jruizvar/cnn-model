@@ -2,7 +2,7 @@
 """
 from absl import flags
 from custom_dataset import load_dataset
-from custom_models import baseline, nn, cnn
+from custom_models import baseline, linear_reg, nn, cnn
 
 import tensorflow as tf
 
@@ -25,7 +25,7 @@ flags.DEFINE_integer("checkpoints",
                      help="Number of checkpoints.")
 flags.DEFINE_string("model",
                     default="baseline",
-                    help="Select model between baseline, nn or cnn")
+                    help="Select model: linear_reg, nn or cnn")
 
 FLAGS = flags.FLAGS
 

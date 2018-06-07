@@ -24,23 +24,23 @@ An initial baseline is:
 <table>
   <tr>
     <th>Model</th>
-    <th>Total Parameters<br></th>
+    <th>Total Parameters</th>
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L6-L17">Baseline</a></td>
-    <td>2</td>
+    <th>2</th>
   </tr>
   <tr>
-    <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L20-L27">Linear Regression</a></td>
-    <td>785</td>
+    <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L20-L27">Linear reg.</a></td>
+    <th>785</th>
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L30-457">Shallow NN</a></td>
-    <td>7971<br></td>
+    <th>7971<br></th>
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L48-83">Convolutional NN</a></td>
-    <td>855425<br></td>
+    <th>855425<br></th>
   </tr>
 </table>
 
@@ -56,28 +56,30 @@ The good performance of a convolutional model at minimizing the
     <td>0 GeV</td>
     <td>10 GeV</td>
     <td>20 GeV</td>
-    <td>30 GeV</td>
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L6-L13">Baseline</a></td>
-    <td>0.134</td>
-    <td>0.052</td>
-    <td>0.049</td>
-    <td>0.056</td>
+    <td>0.135</td>
+    <td>0.046</td>
+    <td>0.042</td>
+  </tr>
+  <tr>
+    <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L20-L27">Linear reg.</a></td>
+    <td>0.141</td>
+    <td>0.095</td>
+    <td>0.099</td>
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L16-L31">Shallow NN</a></td>
     <td>0.133</td>
-    <td>0.040</td>
-    <td>0.035</td>
-    <td>0.033</td>
+    <td>0.043</td>
+    <td>0.036</td>
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L34-L69">Convolutional NN</a></td>
-    <td>0.071</td>
-    <td>0.039</td>
-    <td>0.038</td>
-    <td>0.034</td>
+    <td>0.072</td>
+    <td>0.044</td>
+    <td>0.037</td>
   </tr>
 </table>
 
