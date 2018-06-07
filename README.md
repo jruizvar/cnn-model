@@ -20,6 +20,30 @@ An initial baseline is:
 ![](notebooks/reco_vs_gen_energy.png)
 
 ## Machine Learning Models
+
+<table>
+  <tr>
+    <th>Model</th>
+    <th>Total Parameters<br></th>
+  </tr>
+  <tr>
+    <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L6-L17">Baseline</a></td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L20-L27">Linear Regression</a></td>
+    <td>785</td>
+  </tr>
+  <tr>
+    <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L30-457">Shallow NN</a></td>
+    <td>7971<br></td>
+  </tr>
+  <tr>
+    <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L48-83">Convolutional NN</a></td>
+    <td>855425<br></td>
+  </tr>
+</table>
+
 The good performance of a convolutional model at minimizing the
 [RMSE](python/custom_estimator.py#L58) is demonstrated below.
 
