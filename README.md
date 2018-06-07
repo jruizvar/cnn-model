@@ -28,19 +28,19 @@ An initial baseline is:
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L6-L17">Baseline</a></td>
-    <th>2</th>
+    <td>2</td>
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L20-L27">Linear reg.</a></td>
-    <th>785</th>
+    <td>785</td>
   </tr>
   <tr>
-    <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L30-457">Shallow NN</a></td>
-    <th>7971<br></th>
+    <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L30-L45">Shallow NN</a></td>
+    <td>7971</td>
   </tr>
   <tr>
-    <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L48-83">Convolutional NN</a></td>
-    <th>855425<br></th>
+    <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L48-L83">Convolutional NN</a></td>
+    <td>855425</td>
   </tr>
 </table>
 
@@ -53,33 +53,33 @@ The good performance of a convolutional model at minimizing the
   </tr>
   <tr>
     <td>Model \ Energy threshold</td>
-    <td>0 GeV</td>
-    <td>10 GeV</td>
-    <td>20 GeV</td>
+    <th>0 GeV</th>
+    <th>10 GeV</th>
+    <th>20 GeV</th>
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L6-L13">Baseline</a></td>
-    <td>0.135</td>
-    <td>0.046</td>
-    <td>0.042</td>
+    <td>0.207</td>
+    <td>0.303</td>
+    <td>0.350</td>
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L20-L27">Linear reg.</a></td>
-    <td>0.141</td>
-    <td>0.095</td>
-    <td>0.099</td>
+    <td>0.150</td>
+    <td>0.131</td>
+    <td>0.130</td>
   </tr>
   <tr>
-    <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L16-L31">Shallow NN</a></td>
-    <td>0.133</td>
-    <td>0.043</td>
-    <td>0.036</td>
+    <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L30-L45">Shallow NN</a></td>
+    <td>0.134</td>
+    <td>0.053</td>
+    <td>0.038</td>
   </tr>
   <tr>
-    <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L34-L69">Convolutional NN</a></td>
-    <td>0.072</td>
-    <td>0.044</td>
-    <td>0.037</td>
+    <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L48-L83">Convolutional NN</a></td>
+    <td>0.088</td>
+    <td>0.054</td>
+    <td>0.040</td>
   </tr>
 </table>
 

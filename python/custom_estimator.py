@@ -21,7 +21,7 @@ flags.DEFINE_integer("steps",
                      default=100,
                      help="Number of steps.")
 flags.DEFINE_integer("checkpoints",
-                     default=20,
+                     default=10,
                      help="Number of checkpoints.")
 flags.DEFINE_string("model",
                     default="baseline",
