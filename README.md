@@ -54,35 +54,35 @@ The good performance of the neural networks at minimizing the
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L6-L13">Baseline</a></td>
-    <td>0.574</td>
-    <td>0.488</td>
-    <td>0.363</td>
+    <td>0.141</td>
+    <td>0.062</td>
+    <td>0.042</td>
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L20-L27">Linear reg.</a></td>
-    <td>0.155</td>
-    <td>0.126</td>
-    <td>0.140</td>
+    <td>0.142</td>
+    <td>0.095</td>
+    <td>0.101</td>
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L30-L45">Shallow NN</a></td>
-    <td>0.130</td>
-    <td>0.044</td>
-    <td>0.039</td>
+    <td>0.070</td>
+    <td>0.042</td>
+    <td>0.036</td>
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L48-L83">Convolutional NN</a></td>
-    <td>0.076</td>
-    <td>0.046</td>
-    <td>0.041</td>
+    <td>0.079</td>
+    <td>0.045</td>
+    <td>0.038</td>
   </tr>
 </table>
 
 ## Learning Curve
 The evolution of the [RMSE](python/custom_estimator.py#L58) calculated for the
-validation sample is shown below.
+validation sample is shown below, for the scenario with 0 GeV threshold.
 The horizonal axis represents the number of [steps](python/custom_estimator.py#L80).
-One epoch is equivalent to 100 steps, and the plot extends up to 10 epochs.
+One epoch is equivalent to 100 steps, and the plot extends up to 20 epochs.
 From top to bottom, the curves correspond to the baseline model, linear regression,
 shallow NN and convolutional NN.
 
@@ -108,7 +108,7 @@ CMS electromagnetic calorimeter.
 [tf.estimator](https://www.tensorflow.org/api_docs/python/tf/estimator) API.
 
 Examples of usage:
-- `python custom_estimator.py --model baseline --threshold 0.`
-- `python custom_estimator.py --model linear_reg --threshold 0.`
-- `python custom_estimator.py --model nn --threshold 0.`
-- `python custom_estimator.py --model cnn --threshold 0.`
+- `python custom_estimator.py --threshold 0. --model baseline`
+- `python custom_estimator.py --threshold 0. --model linear_reg`
+- `python custom_estimator.py --threshold 0. --model nn`
+- `python custom_estimator.py --threshold 0. --model cnn`
