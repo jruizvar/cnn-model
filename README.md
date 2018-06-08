@@ -35,7 +35,7 @@ the discrepancy between the reconstructed energy and the generated value.
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L48-L83">Convolutional NN</a></td>
-    <td>111063</td>
+    <td>864183</td>
   </tr>
 </table>
 
@@ -54,27 +54,27 @@ The good performance of the neural networks at minimizing the
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L6-L17">Baseline</a></td>
-    <td>0.195</td>
-    <td>0.191</td>
-    <td>0.190</td>
+    <td>0.205</td>
+    <td>0.203</td>
+    <td>0.201</td>
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L20-L27">Linear reg.</a></td>
-    <td>0.141</td>
-    <td>0.097</td>
-    <td>0.096</td>
+    <td>0.145</td>
+    <td>0.107</td>
+    <td>0.107</td>
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L30-L45">Shallow NN</a></td>
-    <td>0.092</td>
-    <td>0.040</td>
-    <td>0.036</td>
+    <td>0.100</td>
+    <td>0.042</td>
+    <td>0.038</td>
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L48-L83">Convolutional NN</a></td>
-    <td>0.073</td>
-    <td>0.042</td>
-    <td>0.058</td>
+    <td>0.076</td>
+    <td>0.047</td>
+    <td>0.043</td>
   </tr>
 </table>
 
@@ -87,48 +87,38 @@ The horizonal axis represents the number of [steps](python/custom_estimator.py#L
 One epoch is equivalent to 100 steps, and the plot extends up to 20 epochs.
 
 ### Threshold at 0 GeV
-From top to bottom after 2000 steps:
-- Baseline model
-- Linear regression
-- Shallow NN 
-- Convolutional NN
-
 ![](doc/rmse0.png)
 
 ### Threshold at 10 GeV
-From top to bottom after 2000 steps:
-- Baseline model
-- Linear regression
-- Convolutional NN
-- Shallow NN 
-
 ![](doc/rmse10.png)
 
 ### Threshold at 20 GeV
-From top to bottom after 2000 steps:
-- Baseline model
-- Linear regression
-- Convolutional NN
-- Shallow NN 
-
 ![](doc/rmse20.png)
 
-## TensorBoard Graph
+## TensorBoard Graphs
 
-The complete graph associated to the convolutional model is displayed below.
+### [Baseline](python/custom_models.py#L6-L17)
+![](doc/baseline.png)
 
-![](doc/graph.png)
+### [Linear reg.](python/custom_models.py#L20-L27)
+![](doc/linear_reg.png)
+
+### [Shallow NN](python/custom_models.py#L30-L45)
+![](doc/nn.png)
+
+### [Convolutional NN](python/custom_models.py#L48-L83)
+![](doc/cnn.png)
 
 ## Python Modules
 
-## [custom_dataset.py](python/custom_dataset.py)
+### [custom_dataset.py](python/custom_dataset.py)
 - Create a dataset of training and validation examples with simulations of the
 CMS electromagnetic calorimeter.
 
-## [custom_models.py](python/custom_models.py)
+### [custom_models.py](python/custom_models.py)
 - Create models in [TensorFlow](https://www.tensorflow.org).
 
-## [custom_estimator.py](python/custom_estimator.py)
+### [custom_estimator.py](python/custom_estimator.py)
 - Build a regression model using
 [tf.estimator](https://www.tensorflow.org/api_docs/python/tf/estimator) API.
 
