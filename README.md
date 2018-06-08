@@ -40,7 +40,7 @@ the discrepancy between the reconstructed energy and the generated value.
 </table>
 
 The good performance of the neural networks at minimizing the
-[RMSE](python/custom_estimator.py#L58) is demonstrated below.
+[RMSE](python/custom_estimator.py#L58) is demonstrated below:
 
 <table>
   <tr>
@@ -78,9 +78,11 @@ The good performance of the neural networks at minimizing the
   </tr>
 </table>
 
+In the scenario with 0 GeV threshold the convolutional neural networks presents the minimum error.
+Otherwise, the shallow neural network outperforms all other models.
+
 ## Learning Curve
-The evolution of the [RMSE](python/custom_estimator.py#L58) calculated for the
-validation sample.
+The evolution of the [RMSE](python/custom_estimator.py#L58) is calculated for the validation sample.
 The horizonal axis represents the number of [steps](python/custom_estimator.py#L80).
 One epoch is equivalent to 100 steps, and the plot extends up to 20 epochs.
 
