@@ -33,34 +33,37 @@ def model_fn(features, labels, mode):
     """ Model function
     """
     inputs = features['x']
-    training = (mode == tf.estimator.ModeKeys.TRAIN)
-    logits = eval(f'{FLAGS.model}(inputs, training)')
 
-    predictions = tf.squeeze(logits, axis=1)
+    with tf.variable_scope("model"):
+        with tf.variable_scope("logits"):
+            training = (mode == tf.estimator.ModeKeys.TRAIN)
+            logits = eval(f'{FLAGS.model}(inputs, training)')
 
-    if mode == tf.estimator.ModeKeys.PREDICT:
-        return tf.estimator.EstimatorSpec(
-            mode=mode,
-            predictions=predictions)
+        predictions = tf.squeeze(logits, axis=1)
 
-    average_loss = tf.losses.mean_squared_error(labels, predictions)
-    batch_size = tf.shape(labels)[0]
-    total_loss = tf.to_float(batch_size) * average_loss
+        if mode == tf.estimator.ModeKeys.PREDICT:
+            return tf.estimator.EstimatorSpec(
+                mode=mode,
+                predictions=predictions)
 
-    if mode == tf.estimator.ModeKeys.TRAIN:
+        average_loss = tf.losses.mean_squared_error(labels, predictions)
+        batch_size = tf.shape(labels)[0]
+        total_loss = tf.to_float(batch_size) * average_loss
+
+        if mode == tf.estimator.ModeKeys.TRAIN:
+            return tf.estimator.EstimatorSpec(
+                mode=mode,
+                loss=total_loss,
+                train_op=tf.train.AdamOptimizer(
+                    learning_rate=FLAGS.learning_rate).minimize(
+                        loss=average_loss,
+                        global_step=tf.train.get_global_step()))
+
+        rmse = tf.metrics.root_mean_squared_error(labels, predictions)
         return tf.estimator.EstimatorSpec(
             mode=mode,
             loss=total_loss,
-            train_op=tf.train.AdamOptimizer(
-                learning_rate=FLAGS.learning_rate).minimize(
-                    loss=average_loss,
-                    global_step=tf.train.get_global_step()))
-
-    rmse = tf.metrics.root_mean_squared_error(labels, predictions)
-    return tf.estimator.EstimatorSpec(
-        mode=mode,
-        loss=total_loss,
-        eval_metric_ops={'rmse': rmse})
+            eval_metric_ops={'rmse': rmse})
 
 
 def main(_):
@@ -70,11 +73,12 @@ def main(_):
     dataset = load_dataset(FLAGS.threshold)
     runconf = tf.estimator.RunConfig(tf_random_seed=42)
     model_dir = f'./results{int(FLAGS.threshold)}/{FLAGS.model}'
-    classifier = tf.estimator.Estimator(model_fn, model_dir, runconf)
+
+    estimator = tf.estimator.Estimator(model_fn, model_dir, runconf)
 
     for i in range(FLAGS.checkpoints):
         print(f'\nCheckpoint {i+1}')
-        classifier.train(
+        estimator.train(
             input_fn=tf.estimator.inputs.numpy_input_fn(
                 x={'x': dataset.train.images},
                 y=dataset.train.labels,
@@ -82,7 +86,7 @@ def main(_):
                 num_epochs=None,
                 shuffle=False),
             steps=FLAGS.steps)
-        eval_results = classifier.evaluate(
+        eval_results = estimator.evaluate(
             input_fn=tf.estimator.inputs.numpy_input_fn(
                 x={'x': dataset.validation.images},
                 y=dataset.validation.labels,
