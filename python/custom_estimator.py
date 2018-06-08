@@ -3,7 +3,6 @@
 from absl import flags
 from custom_dataset import load_dataset
 from custom_models import baseline, linear_reg, nn, cnn
-
 import tensorflow as tf
 
 tf.logging.set_verbosity(tf.logging.INFO)
@@ -67,9 +66,10 @@ def main(_):
     """ Load dataset.
         Execute custom estimator.
     """
+    runconfig = tf.estimator.RunConfig(tf_random_seed=42)
     dataset = load_dataset(FLAGS.threshold)
     model_dir = f'./results{int(FLAGS.threshold)}/{FLAGS.model}'
-    classifier = tf.estimator.Estimator(model_fn, model_dir)
+    classifier = tf.estimator.Estimator(model_fn, model_dir, runconfig)
     for i in range(FLAGS.checkpoints):
         print(f'\nCheckpoint {i+1}')
         classifier.train(
@@ -78,7 +78,7 @@ def main(_):
                 y=dataset.train.labels,
                 batch_size=FLAGS.batch_size,
                 num_epochs=None,
-                shuffle=True),
+                shuffle=False),
             steps=FLAGS.steps)
         eval_results = classifier.evaluate(
             input_fn=tf.estimator.inputs.numpy_input_fn(

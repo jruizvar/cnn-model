@@ -54,36 +54,36 @@ The good performance of the neural networks at minimizing the
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L6-L13">Baseline</a></td>
-    <td>0.141</td>
-    <td>0.062</td>
-    <td>0.042</td>
+    <td>0.195</td>
+    <td>0.191</td>
+    <td>0.190</td>
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L20-L27">Linear reg.</a></td>
-    <td>0.142</td>
-    <td>0.095</td>
-    <td>0.101</td>
+    <td>0.141</td>
+    <td>0.097</td>
+    <td>0.096</td>
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L30-L45">Shallow NN</a></td>
-    <td>0.070</td>
-    <td>0.042</td>
+    <td>0.092</td>
+    <td>0.040</td>
     <td>0.036</td>
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L48-L83">Convolutional NN</a></td>
-    <td>0.079</td>
-    <td>0.045</td>
-    <td>0.038</td>
+    <td>0.073</td>
+    <td>0.042</td>
+    <td>0.058</td>
   </tr>
 </table>
 
 ## Learning Curve
 The evolution of the [RMSE](python/custom_estimator.py#L58) calculated for the
-validation sample is shown below, for the scenario with 10 GeV threshold.
+validation sample is shown below, for the scenario with 0 GeV threshold.
 The horizonal axis represents the number of [steps](python/custom_estimator.py#L80).
 One epoch is equivalent to 100 steps, and the plot extends up to 20 epochs.
-From top to bottom, the curves correspond to the linear regression, baseline model,
+From top to bottom, the curves correspond to the baseline model, linear regression,
 shallow NN and convolutional NN.
 
 ![](doc/rmse.png)

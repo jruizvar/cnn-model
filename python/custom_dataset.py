@@ -8,8 +8,6 @@ from collections import namedtuple
 import numpy as np
 import os
 
-np.random.seed(42)
-
 DATADIR = '/home/jose/work/ml-physics/data'
 
 IMAGES = 'eplus_Ele-Eta0PhiPiOver2-Energy20to100_V2.npy'
