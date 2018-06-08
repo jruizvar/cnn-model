@@ -33,7 +33,8 @@ def model_fn(features, labels, mode):
     """ Model function
     """
     inputs = features['x']
-    logits = eval(f'{FLAGS.model}(inputs, mode==tf.estimator.ModeKeys.TRAIN)')
+    training = (mode == tf.estimator.ModeKeys.TRAIN)
+    logits = eval(f'{FLAGS.model}(inputs, training)')
 
     predictions = tf.squeeze(logits, axis=1)
 
@@ -66,10 +67,11 @@ def main(_):
     """ Load dataset.
         Execute custom estimator.
     """
-    runconfig = tf.estimator.RunConfig(tf_random_seed=42)
     dataset = load_dataset(FLAGS.threshold)
+    runconf = tf.estimator.RunConfig(tf_random_seed=42)
     model_dir = f'./results{int(FLAGS.threshold)}/{FLAGS.model}'
-    classifier = tf.estimator.Estimator(model_fn, model_dir, runconfig)
+    classifier = tf.estimator.Estimator(model_fn, model_dir, runconf)
+
     for i in range(FLAGS.checkpoints):
         print(f'\nCheckpoint {i+1}')
         classifier.train(

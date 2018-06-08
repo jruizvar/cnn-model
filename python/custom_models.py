@@ -7,7 +7,7 @@ def baseline(inputs, _):
     """ Baseline model
     """
     energy = tf.reduce_sum(
-        tf.reshape(inputs, [-1, 28*28]),
+        inputs,
         axis=1,
         keepdims=True)
     logits = tf.layers.dense(
@@ -21,7 +21,7 @@ def linear_reg(inputs, _):
     """ Linear regression
     """
     logits = tf.layers.dense(
-        tf.reshape(inputs, [-1, 28*28]),
+        inputs,
         units=1,
         activation=None)
     return logits
@@ -31,7 +31,7 @@ def nn(inputs, _):
     """ Shallow neural network
     """
     dense1 = tf.layers.dense(
-        tf.reshape(inputs, [-1, 28*28]),
+        inputs,
         units=10,
         activation=tf.nn.relu)
     dense2 = tf.layers.dense(
@@ -49,7 +49,7 @@ def cnn(inputs, training):
     """ Convolutional neural network
     """
     conv1 = tf.layers.conv2d(
-        inputs,
+        tf.reshape(inputs, [-1, 28, 28, 1]),
         filters=32,
         kernel_size=5,
         padding='same',
@@ -70,7 +70,7 @@ def cnn(inputs, training):
         strides=2)
     dense = tf.layers.dense(
         tf.reshape(pool2, [-1, 7*7*64]),
-        units=256,
+        units=16,
         activation=tf.nn.relu)
     dropout = tf.layers.dropout(
         dense,
@@ -86,13 +86,12 @@ def cnn(inputs, training):
 if __name__ == '__main__':
     """ Profile model parameters
     """
-    inputs = tf.random_uniform([1, 28, 28, 1])
-    # logits = baseline(inputs, True)
-    # logits = linear_reg(inputs, True)
-    # logits = nn(inputs, True)
-    logits = cnn(inputs, True)
-    param_stats = tf.profiler.profile(
-            tf.get_default_graph(),
-            options=tf.profiler.ProfileOptionBuilder
-            .trainable_variables_parameter())
-    print(f'total_params: {param_stats.total_parameters}')
+    inputs = tf.random_uniform([1, 28*28])
+    models = [baseline, linear_reg, nn, cnn]
+    for model in models:
+        logits = model(inputs, True)
+        param_stats = tf.profiler.profile(
+                tf.get_default_graph(),
+                options=tf.profiler.ProfileOptionBuilder
+                .trainable_variables_parameter())
+        print(f'\ntotal_params: {param_stats.total_parameters}\n')

@@ -1,6 +1,6 @@
 """ Comprises 3.2K training examples and 3.2K test examples
     of the CMS electromagnetic calorimeter formatted
-    as 28x28 pixel monochromatic images.
+    as 28 * 28 = 784 pixel monochromatic images.
     The images are labeled with the normalized truth energy.
 """
 from collections import namedtuple
@@ -33,7 +33,7 @@ def load_dataset(threshold):
         Return namedtuple.
     """
     X, y = read_data(threshold)
-    X = np.reshape(X, [-1, 28, 28, 1])
+    X = np.reshape(X, [-1, 28*28])
     m = min(len(y), 6400)
 
     X_train, X_val = X[:m//2], X[m//2:m]
