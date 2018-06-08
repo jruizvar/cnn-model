@@ -80,13 +80,36 @@ The good performance of the neural networks at minimizing the
 
 ## Learning Curve
 The evolution of the [RMSE](python/custom_estimator.py#L58) calculated for the
-validation sample is shown below, for the scenario with 0 GeV threshold.
+validation sample.
 The horizonal axis represents the number of [steps](python/custom_estimator.py#L80).
 One epoch is equivalent to 100 steps, and the plot extends up to 20 epochs.
-From top to bottom, the curves correspond to the baseline model, linear regression,
-shallow NN and convolutional NN.
 
-![](doc/rmse.png)
+### Threshold at 0 GeV
+From top to bottom after 2000 steps:
+- Baseline model
+- Linear regression
+- Shallow NN 
+- Convolutional NN
+
+![](doc/rmse0.png)
+
+### Threshold at 10 GeV
+From top to bottom after 2000 steps:
+- Baseline model
+- Linear regression
+- Convolutional NN
+- Shallow NN 
+
+![](doc/rmse10.png)
+
+### Threshold at 20 GeV
+From top to bottom after 2000 steps:
+- Baseline model
+- Linear regression
+- Convolutional NN
+- Shallow NN 
+
+![](doc/rmse20.png)
 
 ## TensorBoard Graph
 
