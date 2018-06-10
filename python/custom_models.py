@@ -70,7 +70,7 @@ def cnn(inputs):
         strides=2)
     dense = tf.layers.dense(
         tf.reshape(pool2, [-1, 7*7*64]),
-        units=256,
+        units=64,
         activation=tf.nn.relu)
     logits = tf.layers.dense(
         dense,
@@ -85,7 +85,7 @@ if __name__ == '__main__':
     inputs = tf.random_uniform([1, 28*28])
     models = [baseline, linear_reg, nn, cnn]
     for model in models:
-        logits = model(inputs, True)
+        logits = model(inputs)
         param_stats = tf.profiler.profile(
                 tf.get_default_graph(),
                 options=tf.profiler.ProfileOptionBuilder

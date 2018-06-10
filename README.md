@@ -35,7 +35,7 @@ the discrepancy between the reconstructed energy and the generated value.
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L48-L79">Convolutional NN</a></td>
-    <td>864183</td>
+    <td>261687</td>
   </tr>
 </table>
 
@@ -72,14 +72,13 @@ The good performance of the neural networks at minimizing the
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L48-L79">Convolutional NN</a></td>
-    <td>0.070</td>
-    <td>0.038</td>
-    <td>0.040</td>
+    <td>0.071</td>
+    <td>0.039</td>
+    <td>0.034</td>
   </tr>
 </table>
 
-In the scenario with 20 GeV threshold the shallow neural networks presents the minimum error.
-Otherwise, the convolutional neural network outperforms all other models.
+In all scenarios the convolutional neural network outperforms the other models.
 
 ## Learning Curves
 The evolution of the [RMSE](python/custom_estimator.py#L58) is calculated for the validation sample.
