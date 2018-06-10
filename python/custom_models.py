@@ -83,11 +83,12 @@ if __name__ == '__main__':
     """ Profile model parameters
     """
     inputs = tf.random_uniform([1, 28*28])
-    models = [baseline, linear_reg, nn, cnn]
-    for model in models:
-        logits = model(inputs)
-        param_stats = tf.profiler.profile(
-                tf.get_default_graph(),
-                options=tf.profiler.ProfileOptionBuilder
-                .trainable_variables_parameter())
-        print(f'\ntotal_params: {param_stats.total_parameters}\n')
+    # logits = baseline(inputs)
+    # logits = linear_reg(inputs)
+    # logits = nn(inputs)
+    logits = cnn(inputs)
+    param_stats = tf.profiler.profile(
+            tf.get_default_graph(),
+            options=tf.profiler.ProfileOptionBuilder
+            .trainable_variables_parameter())
+    print(f'\ntotal_params: {param_stats.total_parameters}\n')

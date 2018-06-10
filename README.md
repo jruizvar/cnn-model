@@ -35,7 +35,7 @@ the discrepancy between the reconstructed energy and the generated value.
   </tr>
   <tr>
     <td><a href="https://github.com/jruizvar/ml-physics/blob/regression/python/custom_models.py#L48-L79">Convolutional NN</a></td>
-    <td>261687</td>
+    <td>252929</td>
   </tr>
 </table>
 
