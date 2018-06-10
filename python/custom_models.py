@@ -3,7 +3,7 @@
 import tensorflow as tf
 
 
-def baseline(inputs, _):
+def baseline(inputs):
     """ Baseline model
     """
     energy = tf.reduce_sum(
@@ -17,7 +17,7 @@ def baseline(inputs, _):
     return logits
 
 
-def linear_reg(inputs, _):
+def linear_reg(inputs):
     """ Linear regression
     """
     logits = tf.layers.dense(
@@ -27,7 +27,7 @@ def linear_reg(inputs, _):
     return logits
 
 
-def nn(inputs, _):
+def nn(inputs):
     """ Shallow neural network
     """
     dense1 = tf.layers.dense(
@@ -45,7 +45,7 @@ def nn(inputs, _):
     return logits
 
 
-def cnn(inputs, training):
+def cnn(inputs):
     """ Convolutional neural network
     """
     conv1 = tf.layers.conv2d(
@@ -70,14 +70,10 @@ def cnn(inputs, training):
         strides=2)
     dense = tf.layers.dense(
         tf.reshape(pool2, [-1, 7*7*64]),
-        units=16,
+        units=256,
         activation=tf.nn.relu)
-    dropout = tf.layers.dropout(
-        dense,
-        rate=0.5,
-        training=training)
     logits = tf.layers.dense(
-        dropout,
+        dense,
         units=1,
         activation=None)
     return logits

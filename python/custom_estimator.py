@@ -36,8 +36,7 @@ def model_fn(features, labels, mode):
 
     with tf.variable_scope("model"):
         with tf.variable_scope("logits"):
-            training = (mode == tf.estimator.ModeKeys.TRAIN)
-            logits = eval(f'{FLAGS.model}(inputs, training)')
+            logits = eval(f'{FLAGS.model}(inputs)')
 
         predictions = tf.squeeze(logits, axis=1)
 
