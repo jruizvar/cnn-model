@@ -11,7 +11,7 @@ Initially the sample consists of highly sparse images. Consequently, a preproces
 step to find a bounding box of 28x28 around the cell of maximum energy is applied.
 
 ### Average image after preprocessing
-![](notebooks/avg_images.png)
+![](notebooks/avg_image.png)
 
 ### Energy distribution after preprocessing
 ![](notebooks/gen_energy.png)
