@@ -5,13 +5,21 @@ associated with the energy reconstruction in the CMS electromagnetic calorimeter
 
 The results are based on the simulated sample
 
-- `eplus_Ele-Eta0PhiPiOver2-Energy20to100_V2.npy`.
+- `eplus_Ele-Eta0PhiPiOver2-Energy20to100_V2.json`.
 
+Initially the sample consists of highly sparse images. Consequently, a preprocessing
+step to find a bounding box of 28x28 around the cell of maximum energy is applied.
+
+### Average image after preprocessing
+![](notebooks/avg_images.png)
+
+### Energy distribution after preprocessing
 ![](notebooks/gen_energy.png)
 
-The root mean squared error [RMSE](python/custom_estimator.py#L58) measures
+The root mean squared error [RMSE](python/custom_estimator.py#L61) measures
 the discrepancy between the reconstructed energy and the generated value.
 
+### Reconstructed vs Generated energy
 ![](notebooks/reco_vs_gen_energy.png)
 
 ## Machine Learning Models
@@ -40,7 +48,7 @@ the discrepancy between the reconstructed energy and the generated value.
 </table>
 
 The good performance of the neural networks at minimizing the
-[RMSE](python/custom_estimator.py#L58) is demonstrated below:
+[RMSE](python/custom_estimator.py#L61) is demonstrated below:
 
 <table>
   <tr>
@@ -81,8 +89,8 @@ The good performance of the neural networks at minimizing the
 In all scenarios the convolutional neural network outperforms the other models.
 
 ## Learning Curves
-The evolution of the [RMSE](python/custom_estimator.py#L58) is calculated for the validation sample.
-The horizonal axis represents the number of [steps](python/custom_estimator.py#L80).
+The evolution of the [RMSE](python/custom_estimator.py#L61) is calculated for the validation sample.
+The horizonal axis represents the number of [steps](python/custom_estimator.py#L87).
 One epoch is equivalent to 100 steps, and the plot extends up to 20 epochs.
 
 ### Threshold at 0 GeV
