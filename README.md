@@ -7,19 +7,23 @@ The results are based on the simulated sample
 
 - `eplus_Ele-Eta0PhiPiOver2-Energy20to100_V2.json`.
 
+### Average image after preprocessing
 Initially the sample consists of highly sparse images. Consequently, a preprocessing
 step to find a bounding box of 28x28 around the cell of maximum energy is applied.
 
-### Average image after preprocessing
 ![](notebooks/avg_image.png)
 
-### Energy distribution after preprocessing
+### Energy distribution
+The energy distribution at generator level is uniform between 20-100 GeV.
+The reconstructed energy follows the same distribution but two anomalies are present,
+a peak close to 0 GeV and a drop approaching to 100 GeV.
+
 ![](notebooks/gen_energy.png)
 
+### Reconstructed vs Generated Energy
 The root mean squared error [RMSE](python/custom_estimator.py#L61) measures
 the discrepancy between the reconstructed energy and the generated value.
 
-### Reconstructed vs Generated energy
 ![](notebooks/reco_vs_gen_energy.png)
 
 ## Machine Learning Models
