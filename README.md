@@ -131,7 +131,7 @@ CMS electromagnetic calorimeter.
 
 ### [custom_estimator.py](python/custom_estimator.py)
 - Build a regression model using
-[tf.estimator](https://www.tensorflow.org/api_docs/python/tf/estimator) API.
+[tf.estimator](https://www.tensorflow.org/programmers_guide/estimators) API.
 
 Examples of usage:
 - `python custom_estimator.py --threshold 0. --model baseline`
